@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>锦鲤香梳 · 四季花 | 何巍</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background-color: #1a1a1a;
+            color: #e8e0d0;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* 主视觉区 */
+        .hero {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.6;
+            filter: brightness(0.7);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 2rem;
+            max-width: 800px;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            letter-spacing: 0.3em;
+            margin-bottom: 0.5rem;
+            color: #f5f0e8;
+        }
+
+        .hero-subtitle {
+            font-size: 1rem;
+            color: #b8a88a;
+            letter-spacing: 0.2em;
+            margin-bottom: 2rem;
+        }
+
+        .hero-desc {
+            font-size: 0.95rem;
+            color: #c8b898;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 2;
+        }
+
+        /* 分隔线 */
+        .divider {
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #b8a88a, transparent);
+            margin: 3rem auto;
+        }
+
+        /* 四季色区 */
+        .seasons {
+            padding: 4rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #b8a88a;
+            letter-spacing: 0.3em;
+            margin-bottom: 3rem;
+            font-weight: 400;
+        }
+
+        .seasons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .season-card {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 1;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .season-card:hover {
+            transform: scale(1.02);
+        }
+
+        .season-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: filter 0.3s ease;
+        }
+
+        .season-card:hover img {
+            filter: brightness(1.1);
+        }
+
+        .season-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem 1rem 1rem;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            text-align: center;
+        }
+
+        .season-name {
+            font-size: 1.1rem;
+            letter-spacing: 0.2em;
+            color: #f5f0e8;
+        }
+
+        .season-flower {
+            font-size: 0.8rem;
+            color: #b8a88a;
+            margin-top: 0.3rem;
+        }
+
+        /* 材质区 */
+        .materials {
+            padding: 4rem 1rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .material-item {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            align-items: center;
+        }
+
+        .material-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .material-image {
+            flex: 0 0 45%;
+            aspect-ratio: 4/3;
+            overflow: hidden;
+        }
+
+        .material-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .material-text {
+            flex: 1;
+        }
+
+        .material-title {
+            font-size: 1.1rem;
+            color: #b8a88a;
+            letter-spacing: 0.2em;
+            margin-bottom: 1rem;
+        }
+
+        .material-desc {
+            font-size: 0.9rem;
+            color: #a09078;
+            line-height: 2;
+        }
+
+        /* 尺寸区 */
+        .size-section {
+            padding: 4rem 1rem;
+            text-align: center;
+        }
+
+        .size-image {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .size-image img {
+            width: 100%;
+            height: auto;
+        }
+
+        .size-info {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .size-item {
+            text-align: center;
+        }
+
+        .size-number {
+            font-size: 1.5rem;
+            color: #f5f0e8;
+            letter-spacing: 0.1em;
+        }
+
+        .size-label {
+            font-size: 0.8rem;
+            color: #b8a88a;
+            margin-top: 0.3rem;
+        }
+
+        /* 底部信息 */
+        .footer {
+            padding: 3rem 1rem;
+            text-align: center;
+            border-top: 1px solid #333;
+            margin-top: 2rem;
+        }
+
+        .footer-info {
+            font-size: 0.85rem;
+            color: #888;
+            line-height: 2.2;
+        }
+
+        .footer-highlight {
+            color: #b8a88a;
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 1.8rem;
+            }
+
+            .material-item,
+            .material-item:nth-child(even) {
+                flex-direction: column;
+            }
+
+            .material-image {
+                flex: 0 0 100%;
+            }
+
+            .seasons-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 主视觉区 -->
+    <section class="hero">
+        <img src="hero.jpg" alt="锦鲤香梳" class="hero-image">
+        <div class="hero-content">
+            <h1 class="hero-title">锦鲤香梳 · 四季花</h1>
+            <p class="hero-subtitle">福州角梳 × 锦鲤鱼皮</p>
+            <div class="divider"></div>
+            <p class="hero-desc">
+                以鲤为媒，以梳为礼。福州角梳承"三宝"之名，锦鲤鱼皮藏两千年赫哲遗韵，
+                四时花卉着色——这是一件可以梳头、可以赏玩的手作。
+            </p>
+        </div>
+    </section>
+
+    <!-- 四季色 -->
+    <section class="seasons">
+        <h2 class="section-title">四季四色</h2>
+        <div class="seasons-grid">
+            <div class="season-card">
+                <img src="fei-hong.jpg" alt="妃红">
+                <div class="season-label">
+                    <div class="season-name">妃红</div>
+                    <div class="season-flower">桃花</div>
+                </div>
+            </div>
+            <div class="season-card">
+                <img src="yue-bai.jpg" alt="月白">
+                <div class="season-label">
+                    <div class="season-name">月白</div>
+                    <div class="season-flower">茉莉</div>
+                </div>
+            </div>
+            <div class="season-card">
+                <img src="he-he.jpg" alt="赫赫">
+                <div class="season-label">
+                    <div class="season-name">赫赫</div>
+                    <div class="season-flower">秋菊</div>
+                </div>
+            </div>
+            <div class="season-card">
+                <img src="yu-zi.jpg" alt="玉子">
+                <div class="season-label">
+                    <div class="season-name">玉子</div>
+                    <div class="season-flower">梅花</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- 材质 -->
+    <section class="materials">
+        <h2 class="section-title">材质与工艺</h2>
+
+        <div class="material-item">
+            <div class="material-image">
+                <img src="koi-skin.jpg" alt="锦鲤鱼皮">
+            </div>
+            <div class="material-text">
+                <h3 class="material-title">锦鲤鱼皮</h3>
+                <p class="material-desc">
+                    保留天然肌理，每片独一无二。鱼皮造物，赫哲族两千年前的智慧。
+                    我们根据传统四季花全皮箱上的花卉，定制了代表四季的四个色彩。
+                </p>
+            </div>
+        </div>
+
+        <div class="material-item">
+            <div class="material-image">
+                <img src="horn-comb.jpg" alt="白水牛角">
+            </div>
+            <div class="material-text">
+                <h3 class="material-title">白水牛角</h3>
+                <p class="material-desc">
+                    "福州三宝"之一，天然白水牛角温润无静电。梳齿顶端手工打磨，触感温和，
+                    除了梳头，亦可用作刮痧。
+                </p>
+            </div>
+        </div>
+
+        <div class="material-item">
+            <div class="material-image">
+                <img src="tassel.jpg" alt="手工流苏">
+            </div>
+            <div class="material-text">
+                <h3 class="material-title">手工流苏</h3>
+                <p class="material-desc">
+                    使用优质线材，手工制作，呈现出飘逸的一条"金鱼尾"；
+                    串联起整只小金鱼，优雅、灵性。
+                </p>
+            </div>
+        </div>
+
+        <div class="material-item">
+            <div class="material-image">
+                <img src="lacquer-bead.jpg" alt="漆珠">
+            </div>
+            <div class="material-text">
+                <h3 class="material-title">漆珠</h3>
+                <p class="material-desc">
+                    木胎推光漆，仔细打磨。耐用且色彩丰富，和鲤鱼皮是绝配。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- 尺寸 -->
+    <section class="size-section">
+        <h2 class="section-title">尺寸</h2>
+        <div class="size-image">
+            <img src="size.jpg" alt="尺寸标注">
+        </div>
+        <div class="size-info">
+            <div class="size-item">
+                <div class="size-number">62 × 31mm</div>
+                <div class="size-label">头梳</div>
+            </div>
+            <div class="size-item">
+                <div class="size-number">85 × 65mm</div>
+                <div class="size-label">鲤鱼皮套</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 底部 -->
+    <footer class="footer">
+        <div class="footer-info">
+            <p>手工制作周期：<span class="footer-highlight">约8小时</span></p>
+            <p>2020年12月31日上线众筹 · <span class="footer-highlight">65人参与 · 筹得14,673元</span></p>
+            <p style="margin-top: 1rem;">福州市第五批非物质文化遗产——髹漆全皮箱制作技艺官方网站</p>
+        </div>
+    </footer>
+</body>
+</html>
