@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>珍珠鱼皮髹漆拜盒 | 福工皮具非遗传承中心</title>
+    <title>珍珠鱼皮髹漆拜盒：从福州到伦敦 | 福工皮具非遗传承中心</title>
     <style>
         * {
             margin: 0;
@@ -50,7 +50,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('images/仙子整体外观闭合状态.jpg') center/cover;
+            background: url('./images/箱子整体打开盘子还没有取出来.jpg') center/cover;
             opacity: 0.15;
             filter: contrast(1.1) saturate(0.8);
         }
@@ -124,92 +124,154 @@
             letter-spacing: 0.1em;
         }
 
-        /* 缘起 */
-        .origin-text {
-            font-size: 1.25rem;
-            line-height: 2.2;
-            max-width: 700px;
+        /* 引子 */
+        .preface-text {
+            font-size: 1.15rem;
+            line-height: 2.4;
+            max-width: 800px;
             margin: 0 auto;
-            text-align: center;
+            text-align: justify;
         }
 
-        .origin-text p {
+        .preface-text p {
+            margin-bottom: 30px;
+            text-indent: 2em;
+        }
+
+        .preface-text .highlight {
+            color: #c9a96e;
+        }
+
+        /* 订单介绍 */
+        .order-text {
+            font-size: 1.15rem;
+            line-height: 2.4;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .order-text p {
             margin-bottom: 30px;
         }
 
-        .origin-text .highlight {
+        .order-text .quote {
+            font-size: 1.4rem;
             color: #c9a96e;
+            text-align: center;
+            margin: 50px 0;
+            letter-spacing: 0.1em;
+            line-height: 2;
         }
 
-        /* 受赠人画像 */
-        .recipient-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            margin-bottom: 80px;
-        }
-
-        .recipient-card {
-            border: 1px solid #2a2a2a;
-            padding: 40px;
+        
+        .structure-interactive {
+            position: relative;
+            margin-bottom: 60px;
             background: #111;
+            border: 1px solid #2a2a2a;
+            overflow: hidden;
         }
 
-        .recipient-card h3 {
-            font-size: 1.5rem;
-            color: #c9a96e;
-            margin-bottom: 20px;
-            letter-spacing: 0.1em;
-        }
-
-        .recipient-card .tag {
-            display: inline-block;
-            padding: 4px 12px;
-            border: 1px solid #c9a96e;
-            color: #c9a96e;
-            font-size: 0.8rem;
-            margin-bottom: 20px;
-            letter-spacing: 0.1em;
-        }
-
-        .recipient-card p {
-            color: #999;
-            font-size: 0.95rem;
-            line-height: 1.8;
-        }
-
-        .decision-table {
+        .structure-interactive img {
             width: 100%;
-            border-collapse: collapse;
-            margin-top: 60px;
+            display: block;
         }
 
-        .decision-table th {
-            text-align: left;
-            padding: 20px;
-            border-bottom: 2px solid #c9a96e;
+        /* 热点区域 */
+        .hotspot {
+            position: absolute;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        .hotspot::before {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            border: 2px solid #c9a96e;
+            border-radius: 50%;
+            background: rgba(201, 169, 110, 0.2);
+            animation: pulse 2s infinite;
+            transform: translate(-50%, -50%);
+        }
+
+        .hotspot::after {
+            content: attr(data-number);
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            line-height: 24px;
+            text-align: center;
             color: #c9a96e;
+            font-size: 0.85rem;
             font-weight: 400;
-            letter-spacing: 0.1em;
+            transform: translate(-50%, -50%);
         }
 
-        .decision-table td {
-            padding: 20px;
-            border-bottom: 1px solid #2a2a2a;
+        @keyframes pulse {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+            50% { transform: translate(-50%, -50%) scale(1.5); opacity: 0.5; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        }
+
+        /* 热点位置 - 根据实际图片比例调整 */
+        .hotspot-1 { top: 25%; left: 35%; width: 40%; height: 30%; } /* 菱格内衬 */
+        .hotspot-2 { top: 55%; left: 25%; width: 30%; height: 20%; } /* 托盘 */
+        .hotspot-3 { top: 70%; left: 35%; width: 25%; height: 20%; } /* 双隔层 */
+        .hotspot-4 { top: 75%; left: 15%; width: 20%; height: 15%; } /* 锁扣/五金 */
+
+        .hotspot-tooltip {
+            position: absolute;
+            background: rgba(10, 10, 10, 0.95);
+            border: 1px solid #c9a96e;
+            padding: 20px 25px;
+            max-width: 320px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .hotspot:hover .hotspot-tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .hotspot-tooltip h4 {
+            font-size: 1rem;
+            color: #c9a96e;
+            margin-bottom: 8px;
+            letter-spacing: 0.05em;
+        }
+
+        .hotspot-tooltip p {
+            font-size: 0.8rem;
             color: #999;
+            line-height: 1.6;
         }
 
-        .decision-table td:first-child {
-            color: #e8e8e8;
-            width: 25%;
+        /* 提示文字 */
+        .structure-hint {
+            text-align: center;
+            padding: 20px;
+            background: #0a0a0a;
+            border-top: 1px solid #2a2a2a;
         }
 
-        /* 器型与功能 */
+        .structure-hint p {
+            color: #666;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+        }
+
+        /* 其他外观图 */
         .form-gallery {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 20px;
-            margin-bottom: 60px;
+            margin-top: 60px;
         }
 
         .form-gallery img {
@@ -226,46 +288,6 @@
 
         .form-gallery .wide {
             grid-column: span 2;
-        }
-
-        .form-specs {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
-            margin-top: 60px;
-        }
-
-        .spec-item {
-            text-align: center;
-            padding: 30px;
-            border: 1px solid #2a2a2a;
-        }
-
-        .spec-item .number {
-            font-size: 2.5rem;
-            color: #c9a96e;
-            margin-bottom: 10px;
-        }
-
-        .spec-item .label {
-            font-size: 0.9rem;
-            color: #666;
-            letter-spacing: 0.1em;
-        }
-
-        .structure-diagram {
-            background: #111;
-            border: 1px solid #2a2a2a;
-            padding: 40px;
-            margin-top: 60px;
-            text-align: center;
-        }
-
-        .structure-diagram pre {
-            font-family: "Courier New", monospace;
-            color: #c9a96e;
-            font-size: 0.9rem;
-            line-height: 2;
         }
 
         /* 材质解构 */
@@ -313,6 +335,29 @@
             font-size: 0.85rem;
             color: #999;
             line-height: 1.6;
+        }
+
+        .material-note {
+            margin-top: 60px;
+            padding: 40px;
+            border: 1px solid #c9a96e;
+            background: #111;
+            text-align: center;
+        }
+
+        .material-note .label {
+            font-size: 0.8rem;
+            color: #c9a96e;
+            letter-spacing: 0.2em;
+            margin-bottom: 15px;
+        }
+
+        .material-note p {
+            color: #999;
+            font-size: 1rem;
+            line-height: 2;
+            max-width: 700px;
+            margin: 0 auto;
         }
 
         /* 工艺档案 */
@@ -566,12 +611,20 @@
                 font-size: 2rem;
             }
 
-            .recipient-grid,
+            .preface-text,
+            .order-text {
+                font-size: 1rem;
+            }
+
+            .hotspot-tooltip {
+                max-width: 240px;
+                padding: 15px;
+            }
+
             .form-gallery,
             .material-grid,
             .detail-grid,
             .process-gallery,
-            .form-specs,
             .certificate-info,
             .contact-grid {
                 grid-template-columns: 1fr;
@@ -584,7 +637,336 @@
             .section {
                 padding: 80px 20px;
             }
+
+            .contact-grid {
+                flex-direction: column;
+                gap: 40px;
+            }
         }
+        /* 配色释义模块 */
+        .color-intro {
+            font-size: 1.15rem;
+            line-height: 2.2;
+            max-width: 800px;
+            margin: 0 auto 60px;
+            text-align: justify;
+        }
+
+        .color-intro p {
+            text-indent: 2em;
+        }
+
+        .color-origin {
+            max-width: 800px;
+            margin: 0 auto 60px;
+            padding: 40px;
+            border: 1px solid #2a2a2a;
+            background: #111;
+        }
+
+        .color-origin h3 {
+            font-size: 1.3rem;
+            color: #c9a96e;
+            margin-bottom: 20px;
+            letter-spacing: 0.15em;
+            font-weight: 400;
+        }
+
+        .color-origin p {
+            font-size: 1rem;
+            line-height: 2;
+            color: #999;
+            text-indent: 2em;
+        }
+
+        .color-table-section {
+            max-width: 900px;
+            margin: 0 auto 60px;
+        }
+
+        .color-table-section h3 {
+            font-size: 1.3rem;
+            color: #c9a96e;
+            margin-bottom: 30px;
+            letter-spacing: 0.15em;
+            font-weight: 400;
+            text-align: center;
+        }
+
+        .color-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .color-table th {
+            text-align: left;
+            padding: 20px;
+            border-bottom: 2px solid #c9a96e;
+            color: #c9a96e;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            font-size: 0.9rem;
+        }
+
+        .color-table td {
+            padding: 25px 20px;
+            border-bottom: 1px solid #2a2a2a;
+            color: #999;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            vertical-align: top;
+        }
+
+        .color-table td:first-child {
+            width: 8%;
+        }
+
+        .color-table td:nth-child(2) {
+            width: 12%;
+        }
+
+        .color-table td:nth-child(3) {
+            width: 20%;
+        }
+
+        .color-name {
+            font-size: 1.4rem;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+        }
+
+        .color-name.black {
+            color: #666;
+        }
+
+        .color-name.red {
+            color: #c44;
+        }
+
+        .color-name.gold {
+            color: #c9a96e;
+        }
+
+        .color-cosmos {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+            border: 1px solid #c9a96e;
+            background: #111;
+            text-align: center;
+        }
+
+        .color-cosmos h3 {
+            font-size: 1.3rem;
+            color: #c9a96e;
+            margin-bottom: 20px;
+            letter-spacing: 0.15em;
+            font-weight: 400;
+        }
+
+        .color-cosmos p {
+            font-size: 1rem;
+            line-height: 2;
+            color: #999;
+        }
+
+        /* 画廊样式 */
+        .gallery-main {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            background: #111;
+            border: 1px solid #2a2a2a;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .gallery-main img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-main-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: #c9a96e;
+            font-size: 1rem;
+            letter-spacing: 0.1em;
+            text-align: center;
+        }
+
+        .gallery-thumbs {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 8px;
+        }
+
+        .thumb-item {
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            aspect-ratio: 1;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .thumb-item:hover {
+            border-color: #c9a96e;
+        }
+
+        .thumb-item.active {
+            border-color: #c9a96e;
+        }
+
+        .thumb-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.6);
+            transition: all 0.3s ease;
+        }
+
+        .thumb-item:hover img,
+        .thumb-item.active img {
+            filter: brightness(0.9);
+        }
+
+        .thumb-label {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            font-size: 0.75rem;
+            text-align: center;
+            line-height: 1.4;
+            padding: 4px;
+            width: 100%;
+            pointer-events: none;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+            letter-spacing: 0.05em;
+        }
+
+        @media (max-width: 768px) {
+            .gallery-main {
+                height: 300px;
+            }
+
+            .gallery-thumbs {
+                grid-template-columns: repeat(5, 1fr);
+                gap: 6px;
+            }
+
+            .thumb-label {
+                font-size: 0.65rem;
+            }
+        }
+
+        /* 证书展示 */
+        .certificate-display {
+            max-width: 400px;
+            margin: 0 auto;
+            background: #f5f0e8;
+            padding: 50px 40px;
+            border: 1px solid #c9a96e;
+            position: relative;
+        }
+
+        .certificate-vertical {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            height: 500px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: "STXingkai", "Xingkai SC", "KaiTi", "楷体", cursive;
+            color: #1a1a1a;
+        }
+
+        .cert-title {
+            font-size: 1.6rem;
+            letter-spacing: 0.3em;
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+
+        .cert-number {
+            font-size: 0.9rem;
+            letter-spacing: 0.15em;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .cert-divider {
+            width: 1px;
+            height: 40px;
+            background: #c9a96e;
+            margin: 15px 0;
+        }
+
+        .cert-details {
+            font-size: 0.85rem;
+            line-height: 2.2;
+            letter-spacing: 0.1em;
+            color: #444;
+        }
+
+        .cert-details p {
+            margin: 0;
+        }
+
+        .cert-honor {
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            color: #666;
+            margin-top: 20px;
+        }
+
+        .cert-studio {
+            font-size: 0.9rem;
+            letter-spacing: 0.2em;
+            margin-top: 15px;
+        }
+
+        .cert-name {
+            font-size: 1.2rem;
+            letter-spacing: 0.3em;
+            margin-top: 20px;
+            font-weight: 400;
+        }
+
+        .cert-seal {
+            font-size: 0.75rem;
+            color: #c9a96e;
+            margin-top: 25px;
+            letter-spacing: 0.1em;
+            border: 1px solid #c9a96e;
+            padding: 8px 12px;
+            display: inline-block;
+        }
+
+        @media (max-width: 768px) {
+            .certificate-display {
+                padding: 30px 20px;
+            }
+
+            .certificate-vertical {
+                height: 400px;
+            }
+
+            .cert-title {
+                font-size: 1.3rem;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -592,72 +974,41 @@
     <!-- 首屏 -->
     <section class="hero">
         <div class="hero-content">
-            <h1>珍珠鱼皮髹漆拜盒</h1>
-            <p class="subtitle">一件从福州到伦敦的器物</p>
+            <h1>珍珠鱼皮髹漆拜盒<br><span style="font-size: 0.6em; letter-spacing: 0.2em; color: #c9a96e;">从福州到伦敦</span></h1>
         </div>
         <div class="scroll-hint">↓ 向下滚动</div>
     </section>
 
-    <!-- 模块一：缘起 -->
+    <!-- 模块一：引子 -->
     <section class="section">
         <div class="section-title">
             <span class="section-number">01</span>
-            缘起
+            引子
         </div>
-        <div class="origin-text">
-            <p>一位福州人，要送一件礼物给住在伦敦的邻居。</p>
-            <p>邻居是 <span class="highlight">AJ Tracey</span>，英国说唱歌手。<br>他的妻子 <span class="highlight">Liva</span>，在伦敦记录生活与旅行。</p>
-            <p>送礼的人不想选一件"来自中国的纪念品"。<br>她想找一件<span class="highlight">能同时被这两个人使用、理解、并且愿意留在日常生活里</span>的东西。</p>
-            <p>她想到了福州的髹漆皮箱。</p>
+        <div class="preface-text">
+            <p>珍珠鱼皮是我极为偏爱的一种皮料，耐磨性极佳，表面更有着如水钻般璀璨夺目的华丽光泽。鲜为人知的是，我国自古便有珍珠鱼皮的应用传统——《山海经》《吴都赋》《淮南子》《本草纲目》等典籍皆记载鲛（沙）鱼皮<span class="highlight">"皮有珠文，坚劲，可以饰刀剑、为弓鞬"</span>。唐代贵族刀剑以之包覆柄鞘，防滑、耐磨、防腐，尽显华贵，遂成为唐刀标配之一。唐人更从南洋大量进口鳐鱼皮，视之为奢侈品，《撒马尔罕的金桃》对此亦有记载。</p>
+
+            <p>珍珠鱼皮在中国的命运，可谓兴于兵刃，亦亡于兵刃。自唐代以来，它便是上流贵族刀体上的标配装饰，延续近千年。然而到了清末，冷兵器退出历史舞台，需求消亡，工艺便随之湮没。</p>
+
+            <p>而在中国之外，珍珠鱼又被赋予另一重吉祥寓意——其体表珠粒密布，状若聚宝盆，东南亚当地人视之为聚财招福的灵物。更有趣的是，珍珠鱼在现代生物学中的标准中文名称为<span class="highlight">"蝠鲼"</span>，谐音恰是<span class="highlight">"福份"</span>，一语双关，巧合天成。</p>
         </div>
     </section>
 
-    <!-- 模块二：受赠人画像 -->
+    <!-- 模块二：珍珠鱼皮髹漆全皮箱 -->
     <section class="section">
         <div class="section-title">
             <span class="section-number">02</span>
-            受赠人画像
+            珍珠鱼皮髹漆全皮箱
         </div>
+        <div class="order-text">
+            <p>本次订单为一只长30cm、宽17cm、高10cm的现代髹漆全皮箱，由一位从福州走出去、如今长住伦敦的姐姐委托定制，作为一份跨越海峡与文化的郑重之礼，赠予她的英国邻居——一位说唱歌手，祝贺其订婚之喜。</p>
 
-        <div class="recipient-grid">
-            <div class="recipient-card">
-                <h3>AJ Tracey</h3>
-                <span class="tag">说唱歌手</span>
-                <p>英国西伦敦 grime / UK garage / drill 全风格跨越者。拒绝被单一流派定义，"hop between genres" 是其创作哲学。New Era 合作对象，街头潮流与高端时尚混合，Drake 背书。核心态度：不驯、反框架、自信。</p>
-            </div>
-            <div class="recipient-card">
-                <h3>Liva</h3>
-                <span class="tag">生活方式博主</span>
-                <p>Instagram: yungpeppermint，21.3万粉丝。内容标签：travel + beauty + london life。镜头里是伦敦日常与旅行片段，审美建立在"记录真实"而非"制造景观"之上。</p>
-            </div>
+            <p>髹漆全皮箱作为福州女孩的嫁妆箱，已逾三百年历史。</p>
+
+            <p class="quote">传统文化告诉我们：<br>有形必有义，有义必吉祥。</p>
+
+            <p>我希望这件作品中包含的各种吉祥元素能自己说话，让他和他的未婚妻，能够感受到几千公里外文化之间的交融与互动。</p>
         </div>
-
-        <table class="decision-table">
-            <tr>
-                <th>设计决策</th>
-                <th>决策者</th>
-                <th>依据</th>
-            </tr>
-            <tr>
-                <td>黑金红漆面配色</td>
-                <td>肖曙老师</td>
-                <td>老客户，基于对工艺的理解挑选</td>
-            </tr>
-            <tr>
-                <td>大量真金色五金</td>
-                <td>发小（付费客户）</td>
-                <td>主动要求呼应嘻哈文化中的"大金链"符号</td>
-            </tr>
-            <tr>
-                <td>珍珠鱼皮覆面</td>
-                <td>AJ & Liva</td>
-                <td>看样时"一眼确定"——非指定，是选择</td>
-            </tr>
-        </table>
-
-        <p style="margin-top: 40px; text-align: center; color: #666; font-size: 0.9rem; font-style: italic;">
-            这不是"我们为他们设计了一只箱子"，是三个人各自做了一个选择，最后合成了一件东西。
-        </p>
     </section>
 
     <!-- 模块三：器型与功能 -->
@@ -667,89 +1018,75 @@
             器型与功能
         </div>
 
-        <div class="form-gallery">
-            <img src="images/正面.jpg" alt="正面">
-            <img src="images/背面.jpg" alt="背面">
-            <img src="images/顶面.jpg" alt="顶面" class="wide">
-            <img src="images/箱子整体打开展示.jpg" alt="打开状态">
-            <img src="images/1780324290584.JPG" alt="内部结构">
+        <!-- 交互式结构示意图 -->
+        <div class="structure-interactive">
+            <img src="images/结构示意图.jpg" alt="结构示意图">
+
+            <!-- 热点1: 菱格内衬 -->
+            <div class="hotspot hotspot-1" data-number="①">
+                <div class="hotspot-tooltip" style="top: -20px; left: 50%; transform: translateX(-50%);">
+                    <h4>① 菱格内衬</h4>
+                    <p>盖子内侧，欧洲皮箱经典做法。起初用于珠宝固定与缓冲减震，如今多被视为装饰工艺，殊不知其根源乃是功能设计。</p>
+                </div>
+            </div>
+
+            <!-- 热点2: 托盘 -->
+            <div class="hotspot hotspot-2" data-number="②">
+                <div class="hotspot-tooltip" style="top: -20px; left: 50%; transform: translateX(-50%);">
+                    <h4>② 托盘</h4>
+                    <p>可取出，浅盘设计，高频取用。取出后露出下部双隔层。</p>
+                </div>
+            </div>
+
+            <!-- 热点3: 双隔层 -->
+            <div class="hotspot hotspot-3" data-number="③">
+                <div class="hotspot-tooltip" style="bottom: -20px; left: 50%; transform: translateX(-50%);">
+                    <h4>③ 双隔层</h4>
+                    <p>托盘下部规划两处分隔空间，便于日后分类收纳不同物件。</p>
+                </div>
+            </div>
+
+            <!-- 热点4: 锁扣/五金 -->
+            <div class="hotspot hotspot-4" data-number="④">
+                <div class="hotspot-tooltip" style="bottom: -20px; left: 50%; transform: translateX(-50%);">
+                    <h4>④ 锁扣/五金</h4>
+                    <p>黄铜锁扣，真金色，金色/黄金也是嘻哈文化的重要指代。</p>
+                </div>
+            </div>
         </div>
 
-        <div class="form-specs">
-            <div class="spec-item">
-                <div class="number">30</div>
-                <div class="label">长度 cm</div>
-            </div>
-            <div class="spec-item">
-                <div class="number">17</div>
-                <div class="label">宽度 cm</div>
-            </div>
-            <div class="spec-item">
-                <div class="number">10</div>
-                <div class="label">高度 cm</div>
-            </div>
+        <div class="structure-hint">
+            <p>悬停图示各部位，查看结构说明</p>
         </div>
 
-        <div class="structure-diagram">
-            <pre>
-┌─────────────────┐
-│   托盘（可取出）   │  ← 高 2cm，浅盘，高频取用
-├─────────────────┤
-│  左隔层 │ 右隔层  │  ← 黑色山羊皮内衬，分类收纳
-└─────────────────┘
-            </pre>
-            <p style="color: #666; margin-top: 20px; font-size: 0.9rem;">托盘取出后露出双隔层——分层揭示，不是一次性展示所有</p>
-        </div>
-
-        <p style="margin-top: 40px; text-align: center; color: #999; max-width: 600px; margin-left: auto; margin-right: auto;">
-            标准拜盒尺寸，适配首饰、耳机、小物件。不预设用途，"刚好能放进生活"的尺寸，不是展示柜，不是保险箱。
+        <p style="text-align: center; color: #999; max-width: 800px; margin-left: auto; margin-right: auto; font-size: 1rem; line-height: 2.2;">
+            根据委托，这只箱子被设计为珠宝箱。内部设有一方托盘，托盘下部规划两处分隔空间，便于日后分类收纳不同物件。
         </p>
-    </section>
 
-    <!-- 模块四：材质解构 -->
+        <p style="margin-top: 20px; text-align: center; color: #999; max-width: 800px; margin-left: auto; margin-right: auto; font-size: 1rem; line-height: 2.2;">
+            盖子内侧的菱格，实为欧洲皮箱的经典做法——起初用于珠宝固定与缓冲减震，如今多被视为装饰工艺，殊不知其根源乃是功能设计。打开盖子的瞬间，固定于菱格之上的珠宝首饰自然垂落，方便挑选与取放。
+        </p>
+
+        </section>
+
+    <!-- 模块四：黑红金变涂：配色释义 -->
     <section class="section">
         <div class="section-title">
             <span class="section-number">04</span>
-            材质解构
+            黑红金变涂：配色释义
         </div>
 
-        <div class="material-grid">
-            <div class="material-card">
-                <img src="images/珍珠鱼皮漆面特写.jpg" alt="珍珠鱼皮">
-                <div class="overlay">
-                    <h4>珍珠鱼皮</h4>
-                    <p>硬度极高，颗粒天然不规则，光泽随角度变化。类似高端街头品牌的金属纹理语言。</p>
-                </div>
-            </div>
-            <div class="material-card">
-                <img src="images/大漆变涂细节.JPG" alt="大漆变涂">
-                <div class="overlay">
-                    <h4>大漆（黑金红变涂）</h4>
-                    <p>黑漆为底，金漆流动成脉，红漆点缀如焰。三层反复推光后呈现"活的"表面。</p>
-                </div>
-            </div>
-            <div class="material-card">
-                <img src="images/正面锁扣特写.JPG" alt="黄铜五金">
-                <div class="overlay">
-                    <h4>黄铜五金</h4>
-                    <p>真金色，冷金属光泽。发小指定的"大金链"符号——嘻哈文化的物质锚点。</p>
-                </div>
-            </div>
-            <div class="material-card">
-                <img src="images/菱格内衬全景.JPG" alt="黑色山羊皮">
-                <div class="overlay">
-                    <h4>黑色山羊皮</h4>
-                    <p>柔软细腻，透气，随使用产生包浆。从"展示"转向"使用"，从"给别人看"转向"给自己摸"。</p>
-                </div>
-            </div>
+        <div class="lacquer-intro">
+            <h3>黑金红犀皮变涂 · 非遗大漆</h3>
+            <p>古法犀皮源起唐宋，南宋《演繁露》载："朱、黄、黑三色漆沓冒层叠，打磨成文，名曰犀皮"；明代《髹饰录·杨明注》定古法制式：黑面、红中、黄底为原法。本品沿袭古法分层髹涂，以真金替换古石黄，演化黑金红经典配色。</p>
+            <p>据《周礼·考工记》五色礼制：黑为玄天敛藏，朱红属火纳祥，金承中土富蕴。三色对应天地人三才，层层叠漆、研磨晕变，喻时光沉淀、聚福守珍；黑守藏、红兴旺、金聚财，亦为明清首饰箱民间民俗释义。</p>
         </div>
 
-        <p style="margin-top: 60px; text-align: center; color: #666; font-size: 0.9rem; max-width: 700px; margin-left: auto; margin-right: auto;">
-            四种材质按硬度递减排列：鱼皮（最硬）→ 漆层 → 黄铜 → 山羊皮（最软）。开箱的过程是从防御走向亲密。
-        </p>
+        <div class="lacquer-showcase">
+            <img src="./images/漆面变涂技法特写.jpg" alt="黑金红变涂成品">
+        </div>
     </section>
-
-    <!-- 模块五：工艺档案 -->
+<!-- 模块五：工艺档案 -->
     <section class="section">
         <div class="section-title">
             <span class="section-number">05</span>
@@ -758,8 +1095,8 @@
 
         <div class="process-timeline">
             <div class="process-item">
-                <h4>木板裁切制箱</h4>
-                <p>椴木板裁切、拼接、打磨箱体骨架。尺寸精度，接缝严密。</p>
+                <h4>杨木板裁切制箱</h4>
+                <p>杨木板裁切、拼接、打磨箱体骨架。尺寸精度，接缝严密。</p>
             </div>
             <div class="process-item">
                 <h4>珍珠鱼皮裁切贴附</h4>
@@ -779,13 +1116,54 @@
             </div>
         </div>
 
-        <div class="process-gallery">
-            <img src="images/五金特写.jpg" alt="五金">
-            <img src="images/五金细节.jpg" alt="五金细节">
-            <img src="images/大漆变涂细节和五金.jpg" alt="漆与五金">
-            <img src="images/支撑结构特写.JPG" alt="支撑结构">
-            <img src="images/支撑五金特写.JPG" alt="支撑五金">
-            <img src="images/漆面变涂技法特写.jpg" alt="变涂技法">
+        <!-- 大图片展示位 -->
+        <div class="gallery-main">
+            <img id="galleryMainImg" src="./images/珍珠鱼皮图片.jpg" alt="工艺展示">
+            <div id="galleryMainLabel" class="gallery-main-label">珍珠鱼皮图片</div>
+        </div>
+
+        <!-- 缩略图栏 -->
+        <div class="gallery-thumbs">
+            <div class="thumb-item active" data-src="./images/珍珠鱼皮图片.jpg" data-label="珍珠鱼皮图片">
+                <img src="./images/珍珠鱼皮图片.jpg" alt="珍珠鱼皮图片">
+                <span class="thumb-label">珍珠鱼皮图片</span>
+            </div>
+            <div class="thumb-item" data-src="./images/髹漆珍珠鱼皮正面.jpg" data-label="髹漆珍珠鱼皮正面">
+                <img src="./images/髹漆珍珠鱼皮正面.jpg" alt="髹漆珍珠鱼皮正面">
+                <span class="thumb-label">髹漆珍珠鱼皮正面</span>
+            </div>
+            <div class="thumb-item" data-src="./images/髹漆珍珠鱼皮顶盖.jpg" data-label="髹漆珍珠鱼皮顶盖">
+                <img src="./images/髹漆珍珠鱼皮顶盖.jpg" alt="髹漆珍珠鱼皮顶盖">
+                <span class="thumb-label">髹漆珍珠鱼皮顶盖</span>
+            </div>
+            <div class="thumb-item" data-src="./images/髹漆珍珠鱼皮左侧.jpg" data-label="髹漆珍珠鱼皮左侧">
+                <img src="./images/髹漆珍珠鱼皮左侧.jpg" alt="髹漆珍珠鱼皮左侧">
+                <span class="thumb-label">髹漆珍珠鱼皮左侧</span>
+            </div>
+            <div class="thumb-item" data-src="./images/髹漆珍珠鱼皮右侧.jpg" data-label="髹漆珍珠鱼皮右侧">
+                <img src="./images/髹漆珍珠鱼皮右侧.jpg" alt="髹漆珍珠鱼皮右侧">
+                <span class="thumb-label">髹漆珍珠鱼皮右侧</span>
+            </div>
+            <div class="thumb-item" data-src="./images/髹漆珍珠鱼皮背面.jpg" data-label="髹漆珍珠鱼皮背面">
+                <img src="./images/髹漆珍珠鱼皮背面.jpg" alt="髹漆珍珠鱼皮背面">
+                <span class="thumb-label">髹漆珍珠鱼皮背面</span>
+            </div>
+            <div class="thumb-item" data-src="./images/支撑五金特写.jpg" data-label="支撑五金特写">
+                <img src="./images/支撑五金特写.jpg" alt="支撑五金特写">
+                <span class="thumb-label">支撑五金特写</span>
+            </div>
+            <div class="thumb-item" data-src="./images/箱体外观五金特写.jpg" data-label="箱体外观五金特写">
+                <img src="./images/箱体外观五金特写.jpg" alt="箱体外观五金特写">
+                <span class="thumb-label">箱体外观五金特写</span>
+            </div>
+            <div class="thumb-item" data-src="./images/山羊皮内衬特写.jpg" data-label="山羊皮内衬特写">
+                <img src="./images/山羊皮内衬特写.jpg" alt="山羊皮内衬特写">
+                <span class="thumb-label">山羊皮内衬特写</span>
+            </div>
+            <div class="thumb-item" data-src="./images/山羊皮内盖特写.jpg" data-label="山羊皮内盖特写">
+                <img src="./images/山羊皮内盖特写.jpg" alt="山羊皮内盖特写">
+                <span class="thumb-label">山羊皮内盖特写</span>
+            </div>
         </div>
 
         <!-- 视频预留 -->
@@ -803,55 +1181,56 @@
             细节特写
         </div>
 
-        <div class="detail-grid">
-            <div class="detail-item">
-                <img src="images/珍珠鱼皮纹理特写.JPG" alt="鱼皮颗粒">
-                <div class="caption">
-                    <h5>珍珠鱼皮颗粒</h5>
-                    <p>天然不规则排列，角度变化时珠光流转</p>
-                </div>
+        <!-- 大图片展示位 -->
+        <div class="gallery-main">
+            <img id="detailMainImg" src="./images/箱子整体外观.jpg" alt="细节展示">
+            <div id="detailMainLabel" class="gallery-main-label">箱子整体外观</div>
+        </div>
+
+        <!-- 缩略图栏 -->
+        <div class="gallery-thumbs">
+            <div class="thumb-item active" data-src="./images/箱子整体外观.jpg" data-label="箱子整体外观" data-target="detail">
+                <img src="./images/箱子整体外观.jpg" alt="箱子整体外观">
+                <span class="thumb-label">箱子整体外观</span>
             </div>
-            <div class="detail-item">
-                <img src="images/大漆变涂细节1.jpg" alt="变涂层次">
-                <div class="caption">
-                    <h5>黑金红变涂</h5>
-                    <p>黑漆为底，金漆流动，红漆点缀</p>
-                </div>
+            <div class="thumb-item" data-src="./images/箱子整体外观打开展示.jpg" data-label="箱子整体外观打开展示" data-target="detail">
+                <img src="./images/箱子整体外观打开展示.jpg" alt="箱子整体外观打开展示">
+                <span class="thumb-label">箱子整体外观打开展示</span>
             </div>
-            <div class="detail-item">
-                <img src="images/开箱包角特写.JPG" alt="黄铜包角">
-                <div class="caption">
-                    <h5>黄铜包角</h5>
-                    <p>几何切割与鱼皮有机颗粒的对话</p>
-                </div>
+            <div class="thumb-item" data-src="./images/髹漆珍珠鱼皮特写.jpg" data-label="髹漆珍珠鱼皮特写" data-target="detail">
+                <img src="./images/髹漆珍珠鱼皮特写.jpg" alt="髹漆珍珠鱼皮特写">
+                <span class="thumb-label">髹漆珍珠鱼皮特写</span>
             </div>
-            <div class="detail-item">
-                <img src="images/正面打开状态细节特写.jpg" alt="锁扣细节">
-                <div class="caption">
-                    <h5>锁扣咬合</h5>
-                    <p>精度与质感的双重验证</p>
-                </div>
+            <div class="thumb-item" data-src="./images/锁扣细节.jpg" data-label="锁扣细节" data-target="detail">
+                <img src="./images/锁扣细节.jpg" alt="锁扣细节">
+                <span class="thumb-label">锁扣细节</span>
             </div>
-            <div class="detail-item">
-                <img src="images/菱格内衬特写 (2).JPG" alt="菱形格纹">
-                <div class="caption">
-                    <h5>菱形格纹内衬</h5>
-                    <p>8mm线条宽度，黑色山羊皮基底</p>
-                </div>
+            <div class="thumb-item" data-src="./images/黄铜包角.jpg" data-label="黄铜包角" data-target="detail">
+                <img src="./images/黄铜包角.jpg" alt="黄铜包角">
+                <span class="thumb-label">黄铜包角</span>
             </div>
-            <div class="detail-item">
-                <img src="images/定制金属铭牌.jpg" alt="定制铭牌">
-                <div class="caption">
-                    <h5>定制金属铭牌</h5>
-                    <p>Che & Liva · 琴瑟和鸣</p>
-                </div>
+            <div class="thumb-item" data-src="./images/菱形格纹.jpg" data-label="菱形格纹" data-target="detail">
+                <img src="./images/菱形格纹.jpg" alt="菱形格纹">
+                <span class="thumb-label">菱形格纹</span>
+            </div>
+            <div class="thumb-item" data-src="./images/定制铭牌.jpg" data-label="定制铭牌" data-target="detail">
+                <img src="./images/定制铭牌.jpg" alt="定制铭牌">
+                <span class="thumb-label">定制铭牌</span>
+            </div>
+            <div class="thumb-item" data-src="./images/鲤鱼皮皮箱钥匙套装.jpg" data-label="鲤鱼皮皮箱钥匙套装" data-target="detail">
+                <img src="./images/鲤鱼皮皮箱钥匙套装.jpg" alt="鲤鱼皮皮箱钥匙套装">
+                <span class="thumb-label">鲤鱼皮皮箱钥匙套装</span>
             </div>
         </div>
 
-        <p style="margin-top: 60px; text-align: center; color: #666; font-size: 0.9rem; max-width: 600px; margin-left: auto; margin-right: auto;">
-            外壳是给别人看的——鱼皮颗粒、金红变涂、黄铜五金，在光线下的每一次闪烁都是信号。<br><br>
-            内衬是给自己摸的——黑色山羊皮，菱形格纹，托盘取出后的双隔层。
-        </p>
+        <div style="margin-top: 60px; max-width: 800px; margin-left: auto; margin-right: auto;">
+            <p style="text-align: center; color: #999; font-size: 1rem; line-height: 2.2; margin-bottom: 30px;">
+                鱼皮颗粒在光线下碎钻般闪烁，黑红金变涂随角度流转，黄铜五金沉手压阵。唐刀上的珍珠鱼皮，南洋聚宝盆里的"福份"，愿为这对异国新人带来东方古国的深情祝福。
+            </p>
+            <p style="text-align: center; color: #999; font-size: 1rem; line-height: 2.2;">
+                黑色山羊皮温润贴手，菱形格纹承袭欧洲皮箱古法，托盘取出，双隔层现。福州三百年嫁妆箱的底子，伦敦姐姐的托付，英国邻居的惊喜，全藏在一开一合之间。
+            </p>
+        </div>
     </section>
 
     <!-- 模块七：交付与收藏 -->
@@ -861,25 +1240,27 @@
             交付与收藏
         </div>
 
-        <div class="certificate-area">
-            <p class="placeholder-text">收藏证书 · 宣纸烫金</p>
-            <p class="placeholder-sub">设计稿已完成，烫金工序待最终确认<br>实物拍照后替换此占位</p>
+        <div class="certificate-display">
+            <div class="certificate-vertical">
+                <div class="cert-title">珍珠鱼皮髹漆拜盒</div>
+                <div class="cert-number">收藏编号：2026-036</div>
+                <div class="cert-divider"></div>
+                <div class="cert-details">
+                    <p>材质：珍珠鱼皮、大漆、黄铜、山羊皮</p>
+                    <p>工艺：髹漆全皮箱制作技艺</p>
+                    <p>尺寸：30×17×10cm</p>
+                </div>
+                <div class="cert-divider"></div>
+                <div class="cert-honor">福州市级非物质文化遗产</div>
+                <div class="cert-studio">福工皮具非遗传承中心</div>
+                <div class="cert-name">何巍</div>
+                <div class="cert-seal">[个人印章]</div>
+            </div>
         </div>
 
-        <div class="certificate-info">
-            <div class="cert-item">
-                <div class="label">作品名称</div>
-                <div class="value">珍珠鱼皮髹漆拜盒</div>
-            </div>
-            <div class="cert-item">
-                <div class="label">收藏编号</div>
-                <div class="value">2026-036</div>
-            </div>
-            <div class="cert-item">
-                <div class="label">落款</div>
-                <div class="value">福工皮具非遗传承中心 何巍</div>
-            </div>
-        </div>
+        <p style="text-align: center; color: #666; font-size: 0.85rem; margin-top: 30px; letter-spacing: 0.1em;">
+            实物证书：打印过塑，配函套
+        </p>
     </section>
 
     <!-- 模块八：定制通道 -->
@@ -912,6 +1293,46 @@
     <footer>
         <p>福工皮具非遗传承中心 · 福州髹漆全皮箱制作技艺</p>
     </footer>
+
+
+    <script>
+        // 画廊交互 - 支持多个画廊
+        document.addEventListener('DOMContentLoaded', function() {
+            // 模块五画廊
+            initGallery('galleryMainImg', 'galleryMainLabel', '.gallery-thumbs .thumb-item:not([data-target="detail"])');
+
+            // 模块六画廊
+            initGallery('detailMainImg', 'detailMainLabel', '.gallery-thumbs .thumb-item[data-target="detail"]');
+        });
+
+        function initGallery(mainImgId, mainLabelId, thumbSelector) {
+            const mainImg = document.getElementById(mainImgId);
+            const mainLabel = document.getElementById(mainLabelId);
+            const thumbs = document.querySelectorAll(thumbSelector);
+
+            if (!mainImg || !mainLabel || thumbs.length === 0) return;
+
+            thumbs.forEach(thumb => {
+                thumb.addEventListener('click', function() {
+                    const src = this.getAttribute('data-src');
+                    const label = this.getAttribute('data-label');
+
+                    // 切换大图
+                    mainImg.style.opacity = '0';
+                    setTimeout(() => {
+                        mainImg.src = src;
+                        mainImg.alt = label;
+                        mainLabel.textContent = label;
+                        mainImg.style.opacity = '1';
+                    }, 300);
+
+                    // 更新激活状态
+                    thumbs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+        }
+    </script>
 
 </body>
 </html>
