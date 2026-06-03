@@ -774,7 +774,9 @@
         .gallery-main {
             position: relative;
             width: 100%;
-            height: 500px;
+            max-height: 70vh;
+            min-height: 300px;
+            aspect-ratio: 16 / 10;
             background: #111;
             border: 1px solid #2a2a2a;
             margin-bottom: 20px;
@@ -784,7 +786,8 @@
         .gallery-main img {
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            object-fit: cover;
+            object-position: center;
             transition: opacity 0.3s ease;
         }
 
@@ -804,7 +807,19 @@
         .gallery-thumbs {
             display: grid;
             grid-template-columns: repeat(10, 1fr);
-            gap: 8px;
+            gap: 6px;
+        }
+
+        @media (max-width: 768px) {
+            .gallery-thumbs {
+                grid-template-columns: repeat(5, 1fr);
+                gap: 4px;
+            }
+
+            .thumb-label {
+                font-size: 0.6rem;
+                line-height: 1.2;
+            }
         }
 
         .thumb-item {
@@ -814,6 +829,7 @@
             aspect-ratio: 1;
             border: 2px solid transparent;
             transition: all 0.3s ease;
+            background: #111;
         }
 
         .thumb-item:hover {
@@ -828,6 +844,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: center;
             filter: brightness(0.6);
             transition: all 0.3s ease;
         }
@@ -843,14 +860,15 @@
             left: 50%;
             transform: translate(-50%, -50%);
             color: #fff;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             text-align: center;
-            line-height: 1.4;
-            padding: 4px;
-            width: 100%;
+            line-height: 1.3;
+            padding: 2px 4px;
+            width: 95%;
             pointer-events: none;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.8);
-            letter-spacing: 0.05em;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.9), 0 0 6px rgba(0,0,0,0.8);
+            letter-spacing: 0.02em;
+            word-break: break-all;
         }
 
         @media (max-width: 768px) {
@@ -865,6 +883,28 @@
 
             .thumb-label {
                 font-size: 0.65rem;
+            }
+        }
+
+        /* 证书图片展示 */
+        .certificate-image {
+            max-width: 500px;
+            margin: 0 auto;
+            background: #f5f0e8;
+            border: 1px solid #c9a96e;
+            padding: 20px;
+        }
+
+        .certificate-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .certificate-image {
+                max-width: 100%;
+                padding: 10px;
             }
         }
 
@@ -988,9 +1028,7 @@
         <div class="preface-text">
             <p>珍珠鱼皮是我极为偏爱的一种皮料，耐磨性极佳，表面更有着如水钻般璀璨夺目的华丽光泽。鲜为人知的是，我国自古便有珍珠鱼皮的应用传统——《山海经》《吴都赋》《淮南子》《本草纲目》等典籍皆记载鲛（沙）鱼皮<span class="highlight">"皮有珠文，坚劲，可以饰刀剑、为弓鞬"</span>。唐代贵族刀剑以之包覆柄鞘，防滑、耐磨、防腐，尽显华贵，遂成为唐刀标配之一。唐人更从南洋大量进口鳐鱼皮，视之为奢侈品，《撒马尔罕的金桃》对此亦有记载。</p>
 
-            <p>珍珠鱼皮在中国的命运，可谓兴于兵刃，亦亡于兵刃。自唐代以来，它便是上流贵族刀体上的标配装饰，延续近千年。然而到了清末，冷兵器退出历史舞台，需求消亡，工艺便随之湮没。</p>
-
-            <p>而在中国之外，珍珠鱼又被赋予另一重吉祥寓意——其体表珠粒密布，状若聚宝盆，东南亚当地人视之为聚财招福的灵物。更有趣的是，珍珠鱼在现代生物学中的标准中文名称为<span class="highlight">"蝠鲼"</span>，谐音恰是<span class="highlight">"福份"</span>，一语双关，巧合天成。</p>
+            <p>而东南亚国家，珍珠鱼又被赋予另一重吉祥寓意——其体表珠粒密布，状若聚宝盆，东南亚当地人视之为聚财招福的灵物。更有趣的是，珍珠鱼在现代生物学中的标准中文名称为<span class="highlight">"蝠鲼"</span>，谐音恰是<span class="highlight">"福份"</span>，一语双关，巧合天成。</p>
         </div>
     </section>
 
@@ -1001,13 +1039,13 @@
             珍珠鱼皮髹漆全皮箱
         </div>
         <div class="order-text">
-            <p>本次订单为一只长30cm、宽17cm、高10cm的现代髹漆全皮箱，由一位从福州走出去、如今长住伦敦的姐姐委托定制，作为一份跨越海峡与文化的郑重之礼，赠予她的英国邻居——一位说唱歌手，祝贺其订婚之喜。</p>
+            <p style="text-indent: 2em;">本次订单为一只长30cm、宽17cm、高10cm的现代髹漆全皮箱，因藏家横跨榕城、伦敦的生活阅历，促成此番英伦定制机缘，器物由此诞生。箱子将作为一份跨越海峡与文化的郑重之礼，赠予她的英国邻居——一位说唱歌手，祝贺其订婚之喜。</p>
 
-            <p>髹漆全皮箱作为福州女孩的嫁妆箱，已逾三百年历史。</p>
+            <p style="text-indent: 2em;">髹漆全皮箱作为福州女孩的嫁妆箱，有近四百年历史。</p>
 
-            <p class="quote">传统文化告诉我们：<br>有形必有义，有义必吉祥。</p>
+            <p class="quote">学做箱子时师父常和我说：<br>有形必有意，有意必吉祥。</p>
 
-            <p>我希望这件作品中包含的各种吉祥元素能自己说话，让他和他的未婚妻，能够感受到几千公里外文化之间的交融与互动。</p>
+            <p style="text-indent: 2em;">我希望这件作品中包含的各种吉祥元素能自己说话，让他和他的未婚妻，能够感受到几千公里外文化之间的交融与互动。</p>
         </div>
     </section>
 
@@ -1078,8 +1116,8 @@
 
         <div class="lacquer-intro">
             <h3>黑金红犀皮变涂 · 非遗大漆</h3>
-            <p>古法犀皮源起唐宋，南宋《演繁露》载："朱、黄、黑三色漆沓冒层叠，打磨成文，名曰犀皮"；明代《髹饰录·杨明注》定古法制式：黑面、红中、黄底为原法。本品沿袭古法分层髹涂，以真金替换古石黄，演化黑金红经典配色。</p>
-            <p>据《周礼·考工记》五色礼制：黑为玄天敛藏，朱红属火纳祥，金承中土富蕴。三色对应天地人三才，层层叠漆、研磨晕变，喻时光沉淀、聚福守珍；黑守藏、红兴旺、金聚财，亦为明清首饰箱民间民俗释义。</p>
+            <p style="text-indent: 2em;">古法犀皮源起唐宋，南宋《演繁露》载："朱、黄、黑三色漆沓冒层叠，打磨成文，名曰犀皮"；明代《髹饰录·杨明注》定古法制式：黑面、红中、黄底为原法。本品沿袭古法分层髹涂，以真金替换古石黄，演化黑金红经典配色。</p>
+            <p style="text-indent: 2em;">据《周礼·考工记》五色礼制：黑为玄天敛藏，朱红属火纳祥，金承中土富蕴。三色对应天地人三才，层层叠漆、研磨晕变，喻时光沉淀、聚福守珍；黑守藏、红兴旺、金聚财，亦为明清首饰箱民间民俗释义。</p>
         </div>
 
         <div class="lacquer-showcase">
@@ -1224,11 +1262,17 @@
         </div>
 
         <div style="margin-top: 60px; max-width: 800px; margin-left: auto; margin-right: auto;">
-            <p style="text-align: center; color: #999; font-size: 1rem; line-height: 2.2; margin-bottom: 30px;">
+            <p style="text-align: justify; text-indent: 2em; color: #999; font-size: 1rem; line-height: 2.2; margin-bottom: 30px;">
                 鱼皮颗粒在光线下碎钻般闪烁，黑红金变涂随角度流转，黄铜五金沉手压阵。唐刀上的珍珠鱼皮，南洋聚宝盆里的"福份"，愿为这对异国新人带来东方古国的深情祝福。
             </p>
-            <p style="text-align: center; color: #999; font-size: 1rem; line-height: 2.2;">
+            <p style="text-align: justify; text-indent: 2em; color: #999; font-size: 1rem; line-height: 2.2; margin-bottom: 30px;">
                 黑色山羊皮温润贴手，菱形格纹承袭欧洲皮箱古法，托盘取出，双隔层现。福州三百年嫁妆箱的底子，伦敦姐姐的托付，英国邻居的惊喜，全藏在一开一合之间。
+            </p>
+            <p style="text-align: justify; text-indent: 2em; color: #999; font-size: 1rem; line-height: 2.2; margin-bottom: 30px;">
+                应藏家要求，黄铜铭牌上方镌刻「琴瑟和鸣」，下方落「百年好合」，二人英文名手写字体居中嵌于两句吉语之间。琴瑟自古喻夫妻相知相守，也呼应男主人说唱歌手的身份。铭牌采用中式祝词搭配随性手写法文，一雅一洒脱，让这只漆箱既是承载中式祝福的婚嫁礼器，也契合男方街头潮流的个人标识。
+            </p>
+            <p style="text-align: justify; text-indent: 2em; color: #999; font-size: 1rem; line-height: 2.2;">
+                配套两枚红色鲤鱼皮葫芦钥匙护套，一器成对。葫芦在中式民俗里谐音「福禄」，寓意福禄双全、姻缘圆满；甄选天然鲤鱼皮，鱼鳞纹理层层连绵，暗含年年有余、富足顺遂的美好祈愿。赤红配色贴合婚嫁喜庆氛围，成对配置，象征新人成双相守、福运相伴，与箱体订婚贺礼的心意相辅相成。
             </p>
         </div>
     </section>
@@ -1240,22 +1284,8 @@
             交付与收藏
         </div>
 
-        <div class="certificate-display">
-            <div class="certificate-vertical">
-                <div class="cert-title">珍珠鱼皮髹漆拜盒</div>
-                <div class="cert-number">收藏编号：2026-036</div>
-                <div class="cert-divider"></div>
-                <div class="cert-details">
-                    <p>材质：珍珠鱼皮、大漆、黄铜、山羊皮</p>
-                    <p>工艺：髹漆全皮箱制作技艺</p>
-                    <p>尺寸：30×17×10cm</p>
-                </div>
-                <div class="cert-divider"></div>
-                <div class="cert-honor">福州市级非物质文化遗产</div>
-                <div class="cert-studio">福工皮具非遗传承中心</div>
-                <div class="cert-name">何巍</div>
-                <div class="cert-seal">[个人印章]</div>
-            </div>
+        <div class="certificate-image">
+            <img src="./images/收藏证书.jpg" alt="收藏证书">
         </div>
 
         <p style="text-align: center; color: #666; font-size: 0.85rem; margin-top: 30px; letter-spacing: 0.1em;">
@@ -1303,6 +1333,12 @@
 
             // 模块六画廊
             initGallery('detailMainImg', 'detailMainLabel', '.gallery-thumbs .thumb-item[data-target="detail"]');
+
+            // 移动端热点点击交互
+            initMobileHotspots();
+
+            // 触摸事件支持
+            initTouchEvents();
         });
 
         function initGallery(mainImgId, mainLabelId, thumbSelector) {
@@ -1330,6 +1366,41 @@
                     thumbs.forEach(t => t.classList.remove('active'));
                     this.classList.add('active');
                 });
+            });
+        }
+
+        function initMobileHotspots() {
+            const hotspots = document.querySelectorAll('.hotspot');
+
+            hotspots.forEach(hotspot => {
+                hotspot.addEventListener('click', function(e) {
+                    e.stopPropagation();
+
+                    // 关闭其他热点
+                    hotspots.forEach(h => {
+                        if (h !== this) h.classList.remove('active');
+                    });
+
+                    // 切换当前热点
+                    this.classList.toggle('active');
+                });
+            });
+
+            // 点击空白处关闭热点
+            document.addEventListener('click', function() {
+                hotspots.forEach(h => h.classList.remove('active'));
+            });
+        }
+
+        function initTouchEvents() {
+            // 为所有交互元素添加触摸支持
+            const clickables = document.querySelectorAll('.thumb-item, .hotspot');
+
+            clickables.forEach(el => {
+                el.addEventListener('touchstart', function(e) {
+                    e.preventDefault();
+                    this.click();
+                }, { passive: false });
             });
         }
     </script>
