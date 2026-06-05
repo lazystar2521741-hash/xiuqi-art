@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>福礼·才女梳 —— 众筹详情页</title>
+    <style>
+        :root {
+            --bg-primary: #F8F6FA;
+            --bg-secondary: #F0EDF5;
+            --bg-card: #FFFFFF;
+            --bg-card-warm: #FCFAF7;
+            --bg-hover: #F5F3F8;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --text-muted: #999999;
+            --accent-lilac: #CFC4E0;
+            --accent-purple: #7A6799;
+            --accent-gold: #D4C296;
+            --accent-gold-deep: #B8A070;
+            --border-color: #E8E4F0;
+            --border-light: #F0ECF5;
+            --shadow-soft: 0 2px 20px rgba(122, 103, 153, 0.06);
+            --shadow-card: 0 4px 24px rgba(122, 103, 153, 0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.9;
+            -webkit-font-smoothing: antialiased;
+            font-weight: 400;
+        }
+
+        .nav-bar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(248, 246, 250, 0.92);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-light);
+            padding: 0 20px;
+        }
+
+        .nav-inner {
+            max-width: 100%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 0;
+            overflow-x: auto;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .nav-inner::-webkit-scrollbar { display: none; }
+
+        .nav-item {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 13px;
+            padding: 6px 16px;
+            border-radius: 20px;
+            white-space: nowrap;
+            transition: all 0.35s ease;
+            border: 1px solid transparent;
+            font-weight: 400;
+        }
+
+        .nav-item:hover {
+            color: var(--accent-purple);
+            background: rgba(122, 103, 153, 0.06);
+        }
+
+        .nav-item.active {
+            color: var(--accent-purple);
+            border-color: var(--accent-lilac);
+            background: rgba(207, 196, 224, 0.2);
+            font-weight: 500;
+        }
+
+        .section {
+            max-width: 790px;
+            margin: 0 auto;
+            padding: 48px 20px;
+        }
+
+        .section-divider {
+            max-width: 790px;
+            margin: 0 auto;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+        }
+
+        .part-label {
+            display: inline-block;
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent-purple);
+            margin-bottom: 16px;
+            font-weight: 500;
+            opacity: 0.7;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 16px;
+            letter-spacing: 2px;
+            color: var(--text-primary);
+            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+        }
+
+        .section-subtitle {
+            font-size: 15px;
+            color: var(--text-secondary);
+            margin-bottom: 48px;
+            line-height: 1.8;
+            font-weight: 400;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 48px 20px 32px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 600px;
+            background: radial-gradient(ellipse, rgba(207, 196, 224, 0.25) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            font-size: 11px;
+            color: var(--accent-gold-deep);
+            border: 1px solid var(--accent-gold);
+            padding: 5px 18px;
+            border-radius: 20px;
+            margin-bottom: 32px;
+            letter-spacing: 3px;
+            font-weight: 500;
+            background: rgba(212, 194, 150, 0.08);
+        }
+
+        .hero h1 {
+            font-size: 32px;
+            font-weight: 500;
+            line-height: 1.4;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+            letter-spacing: 6px;
+            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+        }
+
+        .hero h1 span {
+            color: var(--accent-purple);
+            font-weight: 600;
+        }
+
+        .hero-slogan {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 48px;
+            font-weight: 400;
+            letter-spacing: 2px;
+        }
+
+        .hero-desc {
+            max-width: 790px;
+            margin: 0 auto;
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 2.2;
+            letter-spacing: 0.5px;
+        }
+
+        .hero-desc strong {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 32px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 10px;
+            bottom: 10px;
+            width: 1px;
+            background: linear-gradient(180deg, var(--accent-lilac), var(--accent-purple), transparent);
+            border-radius: 1px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            padding-left: 24px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -28px;
+            top: 7px;
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: var(--bg-primary);
+            border: 1.5px solid var(--accent-lilac);
+        }
+
+        .timeline-item.highlight::before {
+            background: var(--accent-purple);
+            border-color: var(--accent-purple);
+            box-shadow: 0 0 0 4px rgba(122, 103, 153, 0.12);
+        }
+
+        .timeline-date {
+            font-size: 13px;
+            color: var(--accent-purple);
+            font-weight: 500;
+            margin-bottom: 6px;
+            letter-spacing: 1px;
+        }
+
+        .timeline-text {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .timeline-text strong {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .image-showcase {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); gap: 12px;
+            gap: 16px;
+            margin-top: 32px;
+        }
+
+        .image-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .image-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-card);
+            border-color: var(--accent-lilac);
+        }
+
+        .image-card .img-placeholder {
+            aspect-ratio: 3/4;
+            background: var(--bg-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 12px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .image-card .img-label {
+            padding: 14px;
+            font-size: 12px;
+            color: var(--text-secondary);
+            text-align: center;
+            line-height: 1.7;
+        }
+
+        .craft-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            margin-top: 32px;
+        }
+
+        .craft-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            padding: 32px;
+            transition: all 0.4s ease;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .craft-card:hover {
+            border-color: var(--accent-lilac);
+            box-shadow: var(--shadow-card);
+        }
+
+        .craft-card h4 {
+            font-size: 15px;
+            color: var(--accent-purple);
+            margin-bottom: 12px;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .craft-card p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.9;
+        }
+
+        .craft-card .craft-source {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border-light);
+            font-size: 12px;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+        }
+
+        .origin-list {
+            margin-top: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .origin-item {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            padding: 28px;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.4s ease;
+        }
+
+        .origin-item:hover {
+            border-color: var(--accent-lilac);
+        }
+
+        .origin-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--bg-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+            border: 1px solid var(--border-light);
+        }
+
+        .origin-content h4 {
+            font-size: 15px;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .origin-content p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.9;
+        }
+
+        .tier-container {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            margin-top: 8px;
+        }
+
+        .tier-card {
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            position: relative;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid var(--border-light);
+        }
+
+        .tier-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-card);
+        }
+
+        .tier-card.ya {
+            background: linear-gradient(180deg, #FFFFFF 0%, #FAF8FD 100%);
+            border-color: var(--accent-lilac);
+        }
+
+        .tier-card.ya .tier-header {
+            background: rgba(207, 196, 224, 0.15);
+            border-bottom: 1px solid var(--accent-lilac);
+        }
+
+        .tier-card.ya .tier-tag {
+            background: rgba(207, 196, 224, 0.3);
+            color: var(--accent-purple);
+        }
+
+        .tier-card.zhen {
+            background: linear-gradient(180deg, #FFFFFF 0%, #F8F6FA 100%);
+            border-color: var(--accent-purple);
+        }
+
+        .tier-card.zhen .tier-header {
+            background: rgba(122, 103, 153, 0.08);
+            border-bottom: 1px solid var(--accent-purple);
+        }
+
+        .tier-card.zhen .tier-tag {
+            background: rgba(122, 103, 153, 0.15);
+            color: var(--accent-purple);
+        }
+
+        .tier-card.dian {
+            background: linear-gradient(180deg, #FFFFFF 0%, #FCFAF7 100%);
+            border-color: var(--accent-gold);
+        }
+
+        .tier-card.dian .tier-header {
+            background: rgba(212, 194, 150, 0.12);
+            border-bottom: 1px solid var(--accent-gold);
+        }
+
+        .tier-card.dian .tier-tag {
+            background: rgba(212, 194, 150, 0.25);
+            color: var(--accent-gold-deep);
+        }
+
+        .tier-card.dian .tier-limit {
+            color: var(--accent-gold-deep);
+            border-color: var(--accent-gold);
+        }
+
+        .tier-header {
+            padding: 28px 28px 20px;
+        }
+
+        .tier-tag {
+            display: inline-block;
+            font-size: 11px;
+            padding: 4px 12px;
+            border-radius: 4px;
+            margin-bottom: 12px;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .tier-name {
+            font-size: 22px;
+            font-weight: 500;
+            margin-bottom: 4px;
+            letter-spacing: 2px;
+        }
+
+        .tier-scene {
+            font-size: 13px;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+        }
+
+        .tier-body {
+            padding: 24px 28px;
+        }
+
+        .tier-price-row {
+            display: flex;
+            align-items: baseline;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .tier-price {
+            font-size: 36px;
+            font-weight: 500;
+            color: var(--text-primary);
+            letter-spacing: 1px;
+        }
+
+        .tier-price span {
+            font-size: 18px;
+            font-weight: 400;
+        }
+
+        .tier-limit {
+            font-size: 12px;
+            color: var(--accent-purple);
+            border: 1px solid var(--accent-lilac);
+            padding: 3px 12px;
+            border-radius: 4px;
+            letter-spacing: 1px;
+        }
+
+        .tier-specs {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .tier-spec {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .tier-spec:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .tier-spec-label {
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .tier-spec-value {
+            color: var(--text-primary);
+            font-weight: 400;
+            text-align: right;
+        }
+
+        .tier-desc {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-light);
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 2;
+        }
+
+        .unlock-placeholder {
+            background: var(--bg-card);
+            border: 1px dashed var(--accent-lilac);
+            border-radius: 12px;
+            padding: 56px 24px;
+            text-align: center;
+            color: var(--text-muted);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .unlock-placeholder h3 {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            font-size: 18px;
+            font-weight: 500;
+            letter-spacing: 2px;
+        }
+
+        .unlock-placeholder p {
+            font-size: 14px;
+            line-height: 2;
+            color: var(--text-muted);
+        }
+
+        .team-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-top: 8px;
+        }
+
+        .team-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            padding: 24px;
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            transition: all 0.4s ease;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .team-card:hover {
+            border-color: var(--accent-lilac);
+            box-shadow: var(--shadow-card);
+        }
+
+        .team-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            background: var(--bg-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            flex-shrink: 0;
+            border: 1px solid var(--border-light);
+            color: var(--text-muted);
+            overflow: hidden;
+        }
+
+        .team-card.lead .team-avatar {
+            background: rgba(212, 194, 150, 0.15);
+            color: var(--accent-gold-deep);
+            border-color: var(--accent-gold);
+        }
+
+        .team-info h4 {
+            font-size: 16px;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .team-role {
+            font-size: 11px;
+            color: var(--accent-purple);
+            border: 1px solid var(--accent-lilac);
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .team-card.lead .team-role {
+            color: var(--accent-gold-deep);
+            border-color: var(--accent-gold);
+            background: rgba(212, 194, 150, 0.1);
+        }
+
+        .team-info p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.9;
+            margin-top: 8px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 60px 24px;
+            color: var(--text-muted);
+            font-size: 12px;
+            border-top: 1px solid var(--border-light);
+            margin-top: 20px;
+            letter-spacing: 1px;
+            line-height: 2;
+        }
+
+        .product-img {
+            border-radius: 8px;
+            box-shadow: 0 4px 18px rgba(122,103,153,0.12);
+            margin: 24px auto;
+            display: block;
+        }
+
+        @media (max-width: 640px) {
+            body { font-size: 16px; line-height: 2.0; }
+            .hero { padding: 48px 16px 32px; }
+            .hero h1 { font-size: 28px; letter-spacing: 2px; }
+            .hero-slogan { font-size: 15px; }
+            .hero-desc { font-size: 16px; line-height: 2.2; }
+            .section { padding: 40px 16px; }
+            .section-title { font-size: 22px; letter-spacing: 1px; }
+            .section-subtitle { font-size: 15px; }
+            .timeline-text { font-size: 15px; }
+            .craft-card p { font-size: 15px; }
+            .origin-content p { font-size: 15px; line-height: 2.0; }
+            .tier-name { font-size: 20px; }
+            .tier-desc { font-size: 15px; }
+            .tier-spec { font-size: 14px; }
+            .team-info p { font-size: 15px; }
+            .closing p { font-size: 15px; line-height: 2.2; }
+            .image-showcase { grid-template-columns: 1fr; }
+            .tier-price { font-size: 28px; }
+            .closing { padding: 24px; }
+            .origin-item { flex-direction: column; gap: 12px; }
+            .nav-item { font-size: 12px; padding: 4px 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav-bar">
+        <div class="nav-inner">
+            <a href="#part1" class="nav-item active">项目主视觉</a>
+            <a href="#part2" class="nav-item">项目详情</a>
+            <a href="#part3" class="nav-item">项目回报</a>
+            <a href="#part4" class="nav-item">福利解锁</a>
+            <a href="#part5" class="nav-item">团队介绍</a>
+        </div>
+    </nav>
+
+    <section class="hero" id="part1">
+        <div class="hero-tag">福州髹漆皮具非遗+三宝好礼 · 1621天打磨</div>
+        <h1>福礼 · <span>才女梳</span></h1>
+        <p class="hero-slogan">以福州非遗手作，复刻林徽因的紫色诗意</p>
+
+        <img src="images/主视觉.jpg" alt="才女梳主视觉" class="product-img" style="width:100%; max-width: 750px; aspect-ratio:4/5; object-fit:cover;">
+
+        <p class="hero-desc">
+            福礼・才女梳取材福州才女林徽因的旗袍气韵作为造型蓝本，融汇福州非遗角梳与髹漆皮具两项手艺，撷取林徽因诗作《藤花前》中紫藤花色，将民国诗意风雅，凝练于方寸掌间。
+        </p>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section class="section" id="part2">
+        <span class="part-label">Part 2</span>
+        <h2 class="section-title">项目详情</h2>
+
+        <p style="text-indent: 2em; font-size: 15px; color: var(--text-secondary); line-height: 2.2; margin-bottom: 24px;">
+            福礼・才女梳，诞生于素有 "中国明清建筑博物馆" 盛誉的福州三坊七巷。本品由福州市第五批非物质文化遗产「福州髹漆全皮箱制作技艺」市级传承人何巍匠心主创。
+        </p>
+
+        <img src="images/开篇展示.jpg" alt="开篇展示" style="width:100%; max-width: 750px; aspect-ratio:16/9; object-fit:cover; border-radius:8px; display:block; margin:16px auto; box-shadow:var(--shadow-soft);">
+
+        <p style="text-indent: 2em; font-size: 15px; color: var(--text-secondary); line-height: 2.2; margin-bottom: 24px;">
+            三坊七巷文脉千载、地灵人杰，各式传统手艺在此薪火绵延、代代新生。众多非遗匠人常相聚于光禄坊「福工皮具制造所」，以技会友、切磋匠心，让传统工艺与创意不断碰撞交融。
+        </p>
+
+        <img src="images/福工制造所.jpg" alt="福工皮具制造所" style="width:100%; max-width: 750px; aspect-ratio:16/9; object-fit:cover; border-radius:8px; display:block; margin:16px auto; box-shadow:var(--shadow-soft);">
+
+        <p style="text-indent: 2em; font-size: 15px; color: var(--text-secondary); line-height: 2.2; margin-bottom: 48px;">
+            福礼・才女梳正是这份闽地匠心的凝练之作，融合福州本土经典角梳技艺与古法髹漆皮具非遗手艺，双艺相融、雅韵共生，造就一方温润隽永的东方美学小品。
+        </p>
+
+        <p class="section-subtitle">然而没有想到的是，才女梳从2021年12月13日创意发布到众筹上线，一把梳子经历了1621天的蛰伏与打磨。</p>
+
+        <div class="timeline">
+            <div class="timeline-item highlight">
+                <div class="timeline-date">2021.12.13</div>
+                <div class="timeline-text"><strong>缘起落地</strong> — 初代鲤鱼皮旗袍款角梳套装设计方案敲定</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">2021年底起</div>
+                <div class="timeline-text"><strong>被迫搁置</strong> — 家中亲人骤然抱病，陪护左右，项目封存</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">2022 — 2023年</div>
+                <div class="timeline-text"><strong>蛰伏打磨</strong> — 梳子舍弃旗袍形制，推敲为<strong>古琴造型</strong>；鲤鱼皮护套数轮改版</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">2026新春</div>
+                <div class="timeline-text"><strong>重启契机</strong> — 途经三坊七巷林徽因展馆，见游人络绎、诗意长存，我重拾初心，决定重启这份诗意梳礼</div>
+            </div>
+            <div class="timeline-item highlight">
+                <div class="timeline-date">2026年6月</div>
+                <div class="timeline-text"><strong>众筹上线</strong> — 时隔千余日夜，这份因才女而起的匠心作品，终与世人相见</div>
+            </div>
+        </div>
+
+        <div style="margin-top: 48px; margin-bottom: 8px;">
+            <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px; letter-spacing: 1px;">
+                ▼ 2021年项目创意首次发布
+            </div>
+            <img src="images/21年创意截图.jpg" alt="21年发布创意截图" style="width:100%; width:554px; height:109px; margin:16px auto; object-fit:cover; border-radius:8px; display:block; margin:16px auto; box-shadow:var(--shadow-soft);">
+        </div>
+
+        <h3 style="font-size: 15px; margin: 56px 0 20px; font-weight: 500; color:#7A6799; letter-spacing: 2px;">
+            三版皮套设计演变
+        </h3>
+        <div class="image-showcase">
+            <div class="image-card">
+                <img src="images/21初版皮套.jpg" alt="21年初版皮套" style="width:100%; aspect-ratio:3/4; object-fit:cover; display:block;; border-radius:8px; margin:16px auto">
+                <div class="img-label">21年初版<br><span style="color:var(--text-muted)">初代旗袍款设计稿</span></div>
+            </div>
+            <div class="image-card">
+                <img src="images/23改版皮套.jpg" alt="23年改版皮套" style="width:100%; aspect-ratio:3/4; object-fit:cover; display:block;; border-radius:8px; margin:16px auto">
+                <div class="img-label">23年改版<br><span style="color:var(--text-muted)">古琴造型改版稿</span></div>
+            </div>
+            <div class="image-card">
+                <img src="images/众筹定稿皮套.jpg" alt="众筹定稿皮套" style="width:100%; aspect-ratio:3/4; object-fit:cover; display:block;; border-radius:8px; margin:16px auto">
+                <div class="img-label">本次众筹定稿<br><span style="color:var(--text-muted)">最终定稿产品图</span></div>
+            </div>
+        </div>
+
+        <h3 style="font-size: 15px; margin: 56px 0 20px; font-weight: 500; color:#7A6799; letter-spacing: 2px;">
+            角梳设计演变
+        </h3>
+        <img src="images/角梳演变.jpg" alt="角梳设计演变" style="width:100%; max-width: 750px; aspect-ratio:16/9; object-fit:cover; border-radius:8px; display:block; margin:16px auto; box-shadow:var(--shadow-soft);">
+
+        <h3 style="font-size: 15px; margin: 56px 0 24px; font-weight: 500; color:#7A6799; letter-spacing: 2px;">核心工艺矩阵</h3>
+        <div class="craft-grid">
+            <div class="craft-card">
+                <img src="images/工艺鲤鱼皮.jpg" alt="天然鲤鱼皮工艺" style="width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:8px; margin-bottom:24px; display:block;">
+                <h4>天然鲤鱼皮</h4>
+                <p style="text-indent: 2em;">天然鲤鱼皮原生肌理，片片迥异；搭配擦金、漂漆等技法每件都是孤品不可复刻。</p>
+                <div class="craft-source">鲤之礼，愿美好相随</div>
+            </div>
+            <div class="craft-card">
+                <img src="images/工艺角梳.jpg" alt="福州角梳工艺" style="width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:8px; margin-bottom:24px; display:block;">
+                <h4>福州角梳</h4>
+                <p style="text-indent: 2em;">绵羊角 / 黑水牛角，老师傅手工精磨抛光。</p>
+                <div class="craft-source">福州三宝之一，民俗寓意理顺诸事</div>
+            </div>
+            <div class="craft-card">
+                <img src="images/工艺融合.jpg" alt="髹漆皮艺×角梳工艺" style="width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:8px; margin-bottom:24px; display:block;">
+                <h4>髹漆皮艺 × 角梳工艺</h4>
+                <p style="text-indent: 2em;">以髹漆皮具制作技艺搭配福州三宝之角梳制作技艺，跨界合作。</p>
+                <div class="craft-source">皮具非遗融合福州三宝</div>
+            </div>
+        </div>
+
+        <h3 style="font-size: 15px; margin: 56px 0 24px; font-weight: 500; color:#7A6799; letter-spacing: 2px;">有形必有意，有意必吉祥</h3>
+        <div class="origin-list">
+            <div class="origin-item">
+                <div class="origin-icon">🟣</div>
+                <div class="origin-content">
+                    <h4>紫色诗意</h4>
+                    <p style="text-indent: 2em;">林徽因《藤花前》落笔成诗，留下标志性紫色意象，也是三坊七巷林徽因主题馆的主色调。我们以此专属紫韵为核心设计基调，一器一色，复刻属于福州才女的独特风骨与浪漫诗意。</p>
+                </div>
+            </div>
+            <div class="origin-item">
+                <div class="origin-icon">🎵</div>
+                <div class="origin-content">
+                    <h4>古琴造型</h4>
+                    <p style="text-indent: 2em;">初代版本原为旗袍形制，项目蛰伏打磨期间，我们反复推敲迭代，最终定稿为雅致古琴造型。琴身线条温婉流畅，兼具东方清雅气韵与舒适手持手感。<br><br>本次面世的古琴版型，是我们琴、棋、书、画四大东方才女系列造型的首款开篇之作，其余三款形制，将作为后续独立众筹项目陆续推出。</p>
+                </div>
+            </div>
+            <div class="origin-item">
+                <div class="origin-icon">🐟</div>
+                <div class="origin-content">
+                    <h4>锦鲤寄礼</h4>
+                    <p style="text-indent: 2em;">锦鲤自古寓意吉祥顺遂。以非遗皮艺为载体、以"鲤"寄礼，将平安顺遂的美好祝福，融于方寸随身器物。</p>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 56px;">
+            <h3 style="font-size: 15px; margin-bottom: 32px; font-weight: 500; color:#7A6799; letter-spacing: 2px; text-align: center;">
+                一梳一念 · 赠礼寄情
+            </h3>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;">
+                <div style="text-align: center;">
+                    <img src="images/送礼父母.jpg" alt="送父母" style="width:100%; aspect-ratio:1/1; border-radius:8px; object-fit:cover; display:block; margin:16px auto; border:1px solid var(--border-light);">
+                    <div style="font-size: 16px; color: var(--accent-purple); font-weight: 500; margin-bottom: 10px; letter-spacing: 2px;">送父母</div>
+                    <div style="font-size: 13px; color: var(--text-secondary); line-height: 1.9; text-align: center;">
+                        梳子也代表健康、快乐，把烦恼一扫而过，孝敬、祝福不如送健康
+                    </div>
+                </div>
+                <div style="text-align: center;">
+                    <img src="images/送礼爱人.jpg" alt="送爱人" style="width:100%; aspect-ratio:1/1; border-radius:8px; object-fit:cover; display:block; margin:16px auto; border:1px solid var(--border-light);">
+                    <div style="font-size: 16px; color: var(--accent-purple); font-weight: 500; margin-bottom: 10px; letter-spacing: 2px;">送爱人</div>
+                    <div style="font-size: 13px; color: var(--text-secondary); line-height: 1.9; text-align: center;">
+                        梳子还代表爱情，古代有做定情之意，代表着白头偕老
+                    </div>
+                </div>
+                <div style="text-align: center;">
+                    <img src="images/送礼同事.jpg" alt="送同事" style="width:100%; aspect-ratio:1/1; border-radius:8px; object-fit:cover; display:block; margin:16px auto; border:1px solid var(--border-light);">
+                    <div style="font-size: 16px; color: var(--accent-purple); font-weight: 500; margin-bottom: 10px; letter-spacing: 2px;">送同事</div>
+                    <div style="font-size: 13px; color: var(--text-secondary); line-height: 1.9; text-align: center;">
+                        梳子梳顺头发，也叫顺发，祝愿顺利、顺心、发财、发达
+                    </div>
+                </div>
+                <div style="text-align: center;">
+                    <img src="images/送礼朋友.jpg" alt="送朋友" style="width:100%; aspect-ratio:1/1; border-radius:8px; object-fit:cover; display:block; margin:16px auto; border:1px solid var(--border-light);">
+                    <div style="font-size: 16px; color: var(--accent-purple); font-weight: 500; margin-bottom: 10px; letter-spacing: 2px;">送朋友</div>
+                    <div style="font-size: 13px; color: var(--text-secondary); line-height: 1.9; text-align: center;">
+                        梳子天天使用，是生活细微处的体贴和关心，送梳子就是送温馨
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h3 style="font-size: 15px; margin: 56px 0 20px; font-weight: 500; color:#7A6799; letter-spacing: 2px; text-align: center;">
+            产品细节
+        </h3>
+        <div style="display: flex; flex-direction: column; gap: 24px; max-width: 100%; margin: 0 auto;">
+            <div style="position:relative; width:100%; max-width: 750px; margin:16px auto;">
+            <img src="images/产品细节1.jpg" alt="产品细节1" style="width:100%; max-width:750px; aspect-ratio:16/9; object-fit:cover; border-radius:8px; display:block; margin:16px auto; box-shadow:var(--shadow-soft);">
+            <div style="position:absolute; bottom:8px; right:12px; background:rgba(122,103,153,0.45); color:#fff; font-size:12px; padding:4px 12px; border-radius:20px; letter-spacing:1px; font-weight:400; backdrop-filter:blur(4px);">手工缝线</div>
+        </div>
+            <div style="position:relative; width:100%; max-width: 750px; margin:16px auto;">
+            <img src="images/产品细节2.jpg" alt="产品细节2" style="width:100%; max-width:750px; aspect-ratio:16/9; object-fit:cover; border-radius:8px; display:block; margin:16px auto; box-shadow:var(--shadow-soft);">
+            <div style="position:absolute; bottom:8px; right:12px; background:rgba(122,103,153,0.45); color:#fff; font-size:12px; padding:4px 12px; border-radius:20px; letter-spacing:1px; font-weight:400; backdrop-filter:blur(4px);">鱼皮擦金</div>
+        </div>
+            <div style="position:relative; width:100%; max-width: 750px; margin:16px auto;">
+            <img src="images/产品细节3.jpg" alt="产品细节3" style="width:100%; max-width:750px; aspect-ratio:16/9; object-fit:cover; border-radius:8px; display:block; margin:16px auto; box-shadow:var(--shadow-soft);">
+            <div style="position:absolute; bottom:8px; right:12px; background:rgba(122,103,153,0.45); color:#fff; font-size:12px; padding:4px 12px; border-radius:20px; letter-spacing:1px; font-weight:400; backdrop-filter:blur(4px);">油边平整</div>
+        </div>
+            <div style="position:relative; width:100%; max-width: 750px; margin:16px auto;">
+            <img src="images/产品细节4.jpg" alt="产品细节4" style="width:100%; max-width:750px; aspect-ratio:16/9; object-fit:cover; border-radius:8px; display:block; margin:16px auto; box-shadow:var(--shadow-soft);">
+            <div style="position:absolute; bottom:8px; right:12px; background:rgba(122,103,153,0.45); color:#fff; font-size:12px; padding:4px 12px; border-radius:20px; letter-spacing:1px; font-weight:400; backdrop-filter:blur(4px);">梳齿圆润</div>
+        </div>
+            <div style="position:relative; width:100%; max-width: 750px; margin:16px auto;">
+            <img src="images/产品细节5.jpg" alt="产品细节5" style="width:100%; max-width:750px; aspect-ratio:16/9; object-fit:cover; border-radius:8px; display:block; margin:16px auto; box-shadow:var(--shadow-soft);">
+            <div style="position:absolute; bottom:8px; right:12px; background:rgba(122,103,153,0.45); color:#fff; font-size:12px; padding:4px 12px; border-radius:20px; letter-spacing:1px; font-weight:400; backdrop-filter:blur(4px);">黑水牛角原料</div>
+        </div>
+        </div>
+
+        <h3 style="font-size: 15px; margin: 56px 0 20px; font-weight: 500; color:#7A6799; letter-spacing: 2px; text-align: center;">
+            产品规格
+        </h3>
+        <div style="display: flex; flex-direction: column; gap: 24px; max-width: 100%; margin: 0 auto;">
+            <div style="position:relative; width:100%; max-width: 750px; margin:16px auto;">
+            <img src="images/产品规格1.jpg" alt="产品规格1" style="width:100%; max-width:750px; aspect-ratio:16/9; object-fit:cover; border-radius:8px; display:block; margin:16px auto; box-shadow:var(--shadow-soft);">
+            <div style="position:absolute; bottom:8px; right:12px; background:rgba(122,103,153,0.45); color:#fff; font-size:11px; padding:4px 12px; border-radius:20px; letter-spacing:0.5px; font-weight:400; line-height:1.5; text-align:right; backdrop-filter:blur(4px);">角梳总长约135mm，最宽处约35mm，最厚处约8mm</div>
+        </div>
+            <div style="position:relative; width:100%; max-width: 750px; margin:16px auto;">
+            <img src="images/产品规格2.jpg" alt="产品规格2" style="width:100%; max-width:750px; aspect-ratio:16/9; object-fit:cover; border-radius:8px; display:block; margin:16px auto; box-shadow:var(--shadow-soft);">
+            <div style="position:absolute; bottom:8px; right:12px; background:rgba(122,103,153,0.45); color:#fff; font-size:11px; padding:4px 12px; border-radius:20px; letter-spacing:0.5px; font-weight:400; line-height:1.5; text-align:right; backdrop-filter:blur(4px);">鲤鱼皮套总长约170mm，最宽处约55mm，厚度约5mm</div>
+        </div>
+        </div>
+
+        <h3 style="font-size: 15px; margin: 56px 0 20px; font-weight: 500; color:#7A6799; letter-spacing: 2px; text-align: center;">
+            模特展示
+        </h3>
+        <div style="display: flex; flex-direction: column; gap: 24px; max-width: 100%; margin: 0 auto;">
+            <img src="images/模特展示1.jpg" alt="模特展示1" style="width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:8px; display:block; box-shadow:var(--shadow-soft);; margin:16px auto">
+            <img src="images/模特展示2.jpg" alt="模特展示2" style="width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:8px; display:block; box-shadow:var(--shadow-soft);; margin:16px auto">
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section class="section" id="part3">
+        <span class="part-label">Part 3</span>
+        <h2 class="section-title">项目回报</h2>
+
+        <div class="tier-container">
+            <div class="tier-card ya">
+                <div class="tier-header">
+                    <div class="tier-tag">日常自用</div>
+                    <div class="tier-name">雅赏档</div>
+                    <div class="tier-scene">日常梳理 · 随身便携 · 随手赠礼</div>
+                </div>
+                <div class="tier-body">
+                    <div class="tier-price-row">
+                        <div class="tier-limit">限量 44 套</div>
+                    </div>
+                    <div class="tier-specs">
+                        <div class="tier-spec">
+                            <span class="tier-spec-label">角材</span>
+                            <span class="tier-spec-value">绵羊角</span>
+                        </div>
+                        <div class="tier-spec">
+                            <span class="tier-spec-label">皮套工艺</span>
+                            <span class="tier-spec-value">水染鲤鱼皮套</span>
+                        </div>
+                        <div class="tier-spec">
+                            <span class="tier-spec-label">配色</span>
+                            <span class="tier-spec-value">浅藕紫（复刻展馆经典色）</span>
+                        </div>
+                    </div>
+                    <div class="tier-desc">
+                        贴合《藤花前》诗意意境，配色温柔百搭，质感出众，是日常梳理、随身便携、随手赠礼的主力款型。
+                    </div>
+                </div>
+            </div>
+
+            <div class="tier-card zhen">
+                <div class="tier-header">
+                    <div class="tier-tag">轻奢送礼</div>
+                    <div class="tier-name">珍藏档</div>
+                    <div class="tier-scene">亲友馈赠 · 轻奢伴手 · 仪式感</div>
+                </div>
+                <div class="tier-body">
+                    <div class="tier-price-row">
+                        <div class="tier-limit">限量 73 套</div>
+                    </div>
+                    <div class="tier-specs">
+                        <div class="tier-spec">
+                            <span class="tier-spec-label">角材</span>
+                            <span class="tier-spec-value">黑水牛角</span>
+                        </div>
+                        <div class="tier-spec">
+                            <span class="tier-spec-label">皮套工艺</span>
+                            <span class="tier-spec-value">擦金鲤鱼皮套</span>
+                        </div>
+                        <div class="tier-spec">
+                            <span class="tier-spec-label">配色</span>
+                            <span class="tier-spec-value">浅紫擦金</span>
+                        </div>
+                    </div>
+                    <div class="tier-desc">
+                        升级优质黑水牛角材质，梳齿质感更扎实细腻。搭配重工浅紫擦金工艺皮套，金纹点缀、雅致显贵，兼顾实用性与精致仪式感，是亲友馈赠、轻奢伴手的优选档位。
+                    </div>
+                </div>
+            </div>
+
+            <div class="tier-card dian">
+                <div class="tier-header">
+                    <div class="tier-tag">传世珍藏</div>
+                    <div class="tier-name">红衿档</div>
+                    <div class="tier-scene">才女红衿 · 限定珍藏</div>
+                </div>
+                <div class="tier-body">
+                    <div class="tier-price-row">
+                        <div class="tier-limit">限量 100 套</div>
+                    </div>
+                    <div class="tier-specs">
+                        <div class="tier-spec">
+                            <span class="tier-spec-label">角材</span>
+                            <span class="tier-spec-value">绵羊角</span>
+                        </div>
+                        <div class="tier-spec">
+                            <span class="tier-spec-label">皮套工艺</span>
+                            <span class="tier-spec-value">油染鲤鱼皮套</span>
+                        </div>
+                        <div class="tier-spec">
+                            <span class="tier-spec-label">配色</span>
+                            <span class="tier-spec-value">深红色</span>
+                        </div>
+                    </div>
+                    <div class="tier-desc">
+                        复刻林徽因手缝红衣的正红才女梳套装，鳞纹皮套包裹角梳，以一针一衿的民国手作初心，留存传世风雅。购买后将获得一套图片展示的角梳含礼盒套装。
+                    </div>
+                    <img src="images/林徽因红衣.jpg" alt="林徽因手缝红衣" style="width:100%; max-width: 750px; aspect-ratio:1/1; object-fit:cover; border-radius:8px; display:block; margin:24px auto 0; box-shadow:var(--shadow-soft);">
+                </div>
+            </div>
+        </div>
+
+        <h3 style="font-size: 15px; margin: 56px 0 20px; font-weight: 500; color:#7A6799; letter-spacing: 2px; text-align: center;">
+            包装说明
+        </h3>
+        <div style="display: flex; flex-direction: column; gap: 24px; max-width: 100%; margin: 0 auto;">
+            <div style="position:relative; width:100%; max-width: 750px; margin:16px auto;">
+            <img src="images/包装说明1.jpg" alt="包装说明1" style="width:100%; max-width:750px; aspect-ratio:16/9; object-fit:cover; border-radius:8px; display:block; margin:16px auto; box-shadow:var(--shadow-soft);">
+            <div style="position:absolute; bottom:8px; right:12px; background:rgba(122,103,153,0.45); color:#fff; font-size:12px; padding:4px 12px; border-radius:20px; letter-spacing:1px; font-weight:400; backdrop-filter:blur(4px);">所有套装产品均包含一把角梳和一个鲤鱼皮皮套</div>
+        </div>
+            <div style="position:relative; width:100%; max-width: 750px; margin:16px auto;">
+            <img src="images/包装说明2.jpg" alt="包装说明2" style="width:100%; max-width:750px; aspect-ratio:16/9; object-fit:cover; border-radius:8px; display:block; margin:16px auto; box-shadow:var(--shadow-soft);">
+            <div style="position:absolute; bottom:8px; right:12px; background:rgba(122,103,153,0.45); color:#fff; font-size:11px; padding:4px 12px; border-radius:20px; letter-spacing:0.5px; font-weight:400; line-height:1.5; text-align:right; backdrop-filter:blur(4px);">包装物包含一个腰封封好的竹木礼盒，一个3折产品彩页，一个双面产品使用说明，一个手提带</div>
+        </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section class="section" id="part4">
+        <span class="part-label">Part 4</span>
+        <h2 class="section-title">福利解锁</h2>
+
+        <div style="position:relative; max-width: 750px; margin:0 auto; padding-left:40px;">
+            <!-- 时间线 -->
+            <div style="position:absolute; left:16px; top:0; bottom:0; width:2px; background:linear-gradient(180deg, var(--accent-lilac), var(--accent-purple)); border-radius:2px;"></div>
+
+            <!-- 解锁项1 -->
+            <div style="position:relative; margin-bottom:48px;">
+                <div style="position:absolute; left:-32px; top:6px; width:12px; height:12px; border-radius:50%; background:var(--accent-purple); border:2px solid var(--bg-primary); box-shadow:0 0 0 3px rgba(122,103,153,0.15);"></div>
+                <div style="background:var(--bg-card); border:1px solid var(--border-light); border-radius:8px; padding:24px; box-shadow:var(--shadow-soft);">
+                    <div style="font-size:18px; color:var(--accent-purple); font-weight:500; margin-bottom:12px; letter-spacing:1px;">¥2000 解锁</div>
+                    <div style="font-size:15px; color:var(--text-secondary); line-height:1.8; margin-bottom:16px;">
+                        锦鲤小徽章1枚，颜色随机
+                    </div>
+                    <img src="images/福利解锁1.jpg" alt="福利解锁1" style="width:100%; max-width:480px; aspect-ratio:16/9; object-fit:cover; border-radius:8px; display:block; margin:16px auto; box-shadow:var(--shadow-soft);">
+                </div>
+            </div>
+
+            <!-- 解锁项2 -->
+            <div style="position:relative; margin-bottom:48px;">
+                <div style="position:absolute; left:-32px; top:6px; width:12px; height:12px; border-radius:50%; background:var(--accent-purple); border:2px solid var(--bg-primary); box-shadow:0 0 0 3px rgba(122,103,153,0.15);"></div>
+                <div style="background:var(--bg-card); border:1px solid var(--border-light); border-radius:8px; padding:24px; box-shadow:var(--shadow-soft);">
+                    <div style="font-size:18px; color:var(--accent-purple); font-weight:500; margin-bottom:12px; letter-spacing:1px;">¥3500 解锁</div>
+                    <div style="font-size:15px; color:var(--text-secondary); line-height:1.8; margin-bottom:16px;">
+                        锦鲤化妆镜一个（颜色随机）
+                    </div>
+                    <img src="images/福利解锁2.jpg" alt="福利解锁2" style="width:100%; max-width:480px; aspect-ratio:16/9; object-fit:cover; border-radius:8px; display:block; margin:16px auto; box-shadow:var(--shadow-soft);">
+                </div>
+            </div>
+
+            <!-- 解锁项3 -->
+            <div style="position:relative; margin-bottom:48px;">
+                <div style="position:absolute; left:-32px; top:6px; width:12px; height:12px; border-radius:50%; background:var(--accent-purple); border:2px solid var(--bg-primary); box-shadow:0 0 0 3px rgba(122,103,153,0.15);"></div>
+                <div style="background:var(--bg-card); border:1px solid var(--border-light); border-radius:8px; padding:24px; box-shadow:var(--shadow-soft);">
+                    <div style="font-size:18px; color:var(--accent-purple); font-weight:500; margin-bottom:12px; letter-spacing:1px;">¥5000 解锁</div>
+                    <div style="font-size:15px; color:var(--text-secondary); line-height:1.8; margin-bottom:16px;">
+                        刻字服务，可于角梳柄处刻1个汉字或4个字母，请付款时注意备注
+                    </div>
+                    <img src="images/福利解锁3.jpg" alt="福利解锁3" style="width:100%; max-width:480px; aspect-ratio:16/9; object-fit:cover; border-radius:8px; display:block; margin:16px auto; box-shadow:var(--shadow-soft);">
+                </div>
+            </div>
+
+            <!-- 隐藏福利 -->
+            <div style="position:relative;">
+                <div style="position:absolute; left:-32px; top:6px; width:12px; height:12px; border-radius:50%; background:var(--accent-gold); border:2px solid var(--bg-primary); box-shadow:0 0 0 3px rgba(212,194,150,0.3);"></div>
+                <div style="background:var(--bg-card); border:1px solid var(--accent-gold); border-radius:8px; padding:24px; box-shadow:var(--shadow-soft);">
+                    <div style="font-size:16px; color:var(--accent-gold-deep); font-weight:500; margin-bottom:12px; letter-spacing:1px;">✨ 隐藏福利</div>
+                    <div style="font-size:14px; color:var(--text-secondary); line-height:2;">
+                        另有其他隐藏福利后续公布，敬请期待<br>
+                        只要项目众筹金额达到相应金额，所有参与者都将同样获得已解锁的福利。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 老顾客答谢 -->
+            <div style="position:relative; margin-top:48px;">
+                <div style="position:absolute; left:-32px; top:6px; width:12px; height:12px; border-radius:50%; background:var(--accent-purple); border:2px solid var(--bg-primary); box-shadow:0 0 0 3px rgba(122,103,153,0.15);"></div>
+                <div style="background:var(--bg-card); border:1px solid var(--border-light); border-radius:8px; padding:24px; box-shadow:var(--shadow-soft);">
+                    <div style="font-size:16px; color:var(--accent-purple); font-weight:500; margin-bottom:12px; letter-spacing:1px;">💝 老顾客答谢</div>
+                    <div style="font-size:14px; color:var(--text-secondary); line-height:2; margin-bottom:20px;">
+                        为答谢参加过我们前两次角梳套装众筹的老顾客，再参加本次才女梳众筹时，将免费赠送您一个锦鲤香梳的鲤鱼皮皮套（颜色随机），锦鲤香梳瞬间满血复活！
+                    </div>
+                    <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:16px;">
+                        <a href="https://zhongchou.modian.com/item/107084" target="_blank" style="display:block; text-decoration:none;"><img src="images/前次众筹图片1.jpg" alt="第一次众筹" style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:8px; display:block; box-shadow:var(--shadow-soft);"></a>
+                        <a href="https://zhongchou.modian.com/item/112792" target="_blank" style="display:block; text-decoration:none;"><img src="images/前次众筹图片2.jpg" alt="第二次众筹" style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:8px; display:block; box-shadow:var(--shadow-soft);"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section class="section" id="part5">
+        <span class="part-label">Part 5</span>
+        <h2 class="section-title">团队介绍</h2>
+
+        <div class="team-grid">
+            <div class="team-card lead">
+                <img src="images/何巍.jpg" alt="何巍" class="team-avatar" style="width:100%; width:64px; height:64px; object-fit:cover;; border-radius:8px; margin:16px auto">
+                <div class="team-info">
+                    <h4>何巍 <span class="team-role">第四代非遗传承人</span></h4>
+                    <p style="text-indent: 2em;">福州髹漆全皮箱制作技艺传承人，16年髹漆皮具工艺经验。作品多次亮相纽约、巴黎及伦敦时装周；2017年雪茄皮具套装被多米尼加FUENTE品牌收藏；2018年"刚柔相济系列"入选福州国际漆艺双年展；2022年与LV创意总监Nicolas Ghesquiere合作Malle Gonflée手袋，被LV法国总部档案馆永久收藏。原创鲤鱼皮文创产品多次获国内文创比赛奖项。</p>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <img src="images/黄斌.jpg" alt="黄斌" class="team-avatar" style="width:100%; width:64px; height:64px; object-fit:cover;; border-radius:8px; margin:16px auto">
+                <div class="team-info">
+                    <h4>黄斌 <span class="team-role">第五代新锐匠人</span></h4>
+                    <p style="text-indent: 2em;">拥有十年银行从业阅历。挣脱都市快节奏桎梏，奔赴本心深耕非遗手艺，潜心钻研传统工艺，以全新视角传承创新东方匠心美学。</p>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <img src="images/黄琳茜.jpg" alt="黄琳茜" class="team-avatar" style="width:100%; width:64px; height:64px; object-fit:cover;; border-radius:8px; margin:16px auto">
+                <div class="team-info">
+                    <h4>黄琳茜 <span class="team-role">第五代新锐匠人</span></h4>
+                    <p style="text-indent: 2em;">深耕学前教育领域，擅长少儿美育引导。依托专业优势创新研发非遗趣味课程，以童趣易懂的方式普及传统工艺，为少儿非遗美育注入新生活力。</p>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <img src="images/谢佳.jpg" alt="谢佳" class="team-avatar" style="width:100%; width:64px; height:64px; object-fit:cover;; border-radius:8px; margin:16px auto">
+                <div class="team-info">
+                    <h4>谢佳 <span class="team-role">第五代新锐匠人</span></h4>
+                    <p style="text-indent: 2em;">具备多年学前教育经验，精通少儿美育教学。专注融合幼教理念与非遗技艺，打磨轻量化趣味课程，推动非遗文化年轻化、普及化传播。</p>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <img src="images/连铭锋.jpg" alt="连铭锋" class="team-avatar" style="width:100%; width:64px; height:64px; object-fit:cover;; border-radius:8px; margin:16px auto">
+                <div class="team-info">
+                    <h4>连铭锋 <span class="team-role">第五代新锐匠人</span></h4>
+                    <p style="text-indent: 2em;">深入传统文化领域，积淀丰厚人文底蕴。将多元文化内涵融入非遗研习与创作，突破传统创作局限，为古老非遗技艺赋予全新表达与内核。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" style="padding-top: 0;">
+        <h3 style="font-size: 15px; margin-bottom: 32px; font-weight: 500; color:#7A6799; letter-spacing: 2px; text-align: center;">
+            福工皮具非遗传承中心
+        </h3>
+        <div style="max-width: 100%; margin: 0 auto;">
+            <img src="images/传承中心.jpg" alt="福工皮具非遗传承中心" style="width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:8px; display:block; box-shadow:var(--shadow-soft);; margin:16px auto">
+        </div>
+    </section>
+
+    <section class="section" style="padding-top: 0;">
+        <h3 style="font-size: 15px; margin-bottom: 32px; font-weight: 500; color:#7A6799; letter-spacing: 2px; text-align: center;">
+            联系我们
+        </h3>
+        <div style="max-width: 100%; margin: 0 auto; background: var(--bg-card); border: 1px solid var(--border-light); border-radius: 8px; padding: 32px; box-shadow: var(--shadow-soft);">
+            <div style="font-size: 14px; color: var(--text-secondary); line-height: 2.2;">
+                <p style="text-indent: 2em; margin-bottom: 20px;">
+                    如果您有任何问题或建议、意见，可以在评论区留言或通过后台私信联系我们，我们会及时回复。
+                </p>
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                    <div>
+                        <span style="color: var(--accent-purple); font-weight: 500;">联系电话：</span>13665033315 何先生
+                    </div>
+                    <div>
+                        <span style="color: var(--accent-purple); font-weight: 500;">地址：</span>福建省福州市台江区望龙二路3号建发汇成国际大厦湾悦中心2楼福工皮具非遗传承中心
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" style="padding-top: 0;">
+        <h3 style="font-size: 15px; margin-bottom: 32px; font-weight: 500; color:#7A6799; letter-spacing: 2px; text-align: center;">
+            注意事项
+        </h3>
+        <div style="max-width: 100%; margin: 0 auto; background: var(--bg-card); border: 1px solid var(--border-light); border-radius: 8px; padding: 32px; box-shadow: var(--shadow-soft);">
+            <div style="display: flex; flex-direction: column; gap: 20px; font-size: 14px; color: var(--text-secondary); line-height: 2;">
+                <div>
+                    <span style="color: var(--accent-purple); font-weight: 500;">发货地点：</span>福建福州
+                </div>
+                <div>
+                    <span style="color: var(--accent-purple); font-weight: 500;">物流配送：</span>全国包邮（圆通快递或韵达快递）
+                </div>
+                <div>
+                    <span style="color: var(--accent-purple); font-weight: 500;">收货地址：</span>众筹交付期较长，请您在下单时参考收货时间，填写您的收货地址。
+                </div>
+                <div>
+                    <span style="color: var(--accent-purple); font-weight: 500;">地址修改：</span>支持者下单后需要修改地址，可在自己的订单详情中自行修改。修改地址入口关闭前，我们会通过项目更新通知大家确认收货地址。
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        福州市多福箱贸易有限公司 · 福州髹漆全皮箱制作技艺保护单位<br>
+        非遗传承，匠心所致
+    </footer>
+
+    <script>
+        const sections = document.querySelectorAll('.section, .hero');
+        const navItems = document.querySelectorAll('.nav-item');
+
+        navItems.forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const target = document.getElementById(targetId);
+                if (target) {
+                    const navHeight = document.querySelector('.nav-bar').offsetHeight;
+                    const targetPosition = target.offsetTop - navHeight - 20;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const navHeight = document.querySelector('.nav-bar').offsetHeight;
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - navHeight - 30;
+                if (window.scrollY >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === '#' + current) {
+                    item.classList.add('active');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
